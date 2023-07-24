@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import colors from './colors';
 
-interface StyledButtonProps {
+interface StyledTagProps {
   readonly variant: 'color' | 'gray';
 }
 
-const StyledTag = styled.span<StyledButtonProps>`
+const StyledTag = styled.span<StyledTagProps>`
   background-color: ${(props) => backgroundColor[props.variant]};
   color: ${(props) => textColor[props.variant]};
   border-radius: ${(props) => radiusSize[props.variant]};
