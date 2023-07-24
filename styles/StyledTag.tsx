@@ -1,21 +1,6 @@
 import styled from 'styled-components';
 import colors from './colors';
 
-const backgroundColor = {
-  color: colors.primarybg,
-  gray: colors.graybg,
-};
-
-const textColor = {
-  color: colors.primary,
-  gray: colors.gray3,
-};
-
-const radiusSize = {
-  color: '8px',
-  gray: '100px',
-};
-
 interface StyledButtonProps {
   readonly variant: 'color' | 'gray';
 }
@@ -33,3 +18,18 @@ const StyledTag = styled.span<StyledButtonProps>`
 `;
 
 export default StyledTag;
+
+const backgroundColor = {
+  color: colors.primarybg,
+  gray: colors.graybg,
+};
+
+const textColor = {
+  color: colors.primary,
+  gray: colors.gray3,
+};
+
+const radiusSize = {
+  color: '8px',
+  gray: '100px',
+};
