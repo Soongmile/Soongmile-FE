@@ -50,6 +50,7 @@ html, body {
     height: 100%;
     min-width: 1200px;
     background-color: ${colors.white};
+	font-family: 'Pretendard Variable';
     font-size : 16px;
     color: rgb(58, 58, 58);
   }
