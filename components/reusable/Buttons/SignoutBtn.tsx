@@ -5,9 +5,7 @@ import PencilIcon from '../../../assets/icons/Pencil.svg';
 
 export const SignoutBtn: React.FC<ButtonProps> = ({ onClick }) => {
     return (
-    <>
     <ButtonWrapper onClick={onClick}>탈퇴하기</ButtonWrapper>
-    </>
     )
 }
 

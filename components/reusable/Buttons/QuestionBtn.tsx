@@ -5,14 +5,12 @@ import PencilIcon from '../../../assets/icons/Pencil.svg';
 
 export const QuestionBtn: React.FC<ButtonProps> = ({ onClick }) => {
     return (
-    <>
     <ButtonWrapper onClick={onClick}>
         <IconWrapper>
             <PencilIcon alt="연필" width="24" height="24"/>
         </IconWrapper>
         질문하기
     </ButtonWrapper>
-    </>
     )
 }
 

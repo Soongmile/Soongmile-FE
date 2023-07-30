@@ -7,9 +7,7 @@ export const CheckedBtn: React.FC<ButtonProps> = ({
     disabled = false,
   }) => {
     return (
-    <>
     <ButtonWrapper onClick={onClick} disabled={disabled}>중복확인</ButtonWrapper>
-    </>
     )
 }
 

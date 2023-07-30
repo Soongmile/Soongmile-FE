@@ -11,9 +11,7 @@ export const UploadBtn: React.FC<ButtonProps> = ({
     disabled = false,
   }) => {
     return (
-    <>
     <ButtonWrapper onClick={onClick} disabled={disabled}>업로드</ButtonWrapper>
-    </>
     )
 }
 
