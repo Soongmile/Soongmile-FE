@@ -36,7 +36,7 @@ export function Card() {
   );
 }
 
-const StyledCard: any = styled.div`
+const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
