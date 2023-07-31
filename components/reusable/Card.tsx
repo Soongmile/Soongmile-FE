@@ -2,6 +2,7 @@ import { Spacing } from './Spacing';
 import { Tag } from './Tag';
 import styled from 'styled-components';
 import colors from '@/styles/colors';
+import theme from '@/styles/theme';
 
 export function Card() {
   return (
@@ -53,9 +54,9 @@ const ContentText = styled.div`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  font-size: 14px;
+  font-size: ${theme.fontStyles.Text_S.fontSize}px;
   height: 51px;
-  color: ${colors.gray3};
+  color: ${theme.colors.gray3};
 `;
 
 const StackTagsWrap = styled.div`
@@ -69,7 +70,8 @@ const Title = styled.div`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
-  font-size: 18px;
+  font-size: ${theme.fontStyles.Text_M.fontSize}px;
+  font-weight: ${theme.fontStyles.Text_L.fontWeight};
 `;
 
 const InfoTextWrap = styled.div`
@@ -82,7 +84,8 @@ const InfoTextWrap = styled.div`
 `;
 
 const InfoText = styled.span`
-  font-size: 12px;
+  font-size: ${theme.fontStyles.Caption.fontSize}px;
+  font-weight: ${theme.fontStyles.Caption.fontWeight};
 `;
 
 const InfoTwoTextWrap = styled(InfoTextWrap)`
