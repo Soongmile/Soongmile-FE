@@ -1,9 +1,9 @@
-import { Spacing } from './Spacing';
-import { Tag } from './Tag';
 import styled from 'styled-components';
 import colors from '@/styles/colors';
+import Tag from './Tag';
+import Spacing from './Spacing';
 
-export function Card() {
+const Card = () => {
   return (
     <StyledCard>
       <Tag variant="color" content="직무" />
@@ -17,11 +17,11 @@ export function Card() {
       </ContentText>
       <Spacing direction="vertical" size={16} />
       <StackTagsWrap>
-        <Tag variant="gray" content="스택"></Tag>
+        <Tag variant="gray" content="스택" />
         <Spacing direction="horizontal" size={8} />
-        <Tag variant="gray" content="스택"></Tag>
+        <Tag variant="gray" content="스택" />
         <Spacing direction="horizontal" size={8} />
-        <Tag variant="gray" content="스택"></Tag>
+        <Tag variant="gray" content="스택" />
       </StackTagsWrap>
       <Spacing direction="vertical" size={16} />
       <InfoTextWrap>
@@ -34,7 +34,9 @@ export function Card() {
       </InfoTextWrap>
     </StyledCard>
   );
-}
+};
+
+export default Card;
 
 const StyledCard = styled.div`
   display: flex;

@@ -1,4 +1,4 @@
-import { Card } from '@/components/reusable/Card';
+import Card from '@/components/reusable/Card';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {

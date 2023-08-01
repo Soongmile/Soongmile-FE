@@ -2,14 +2,15 @@ import { HTMLAttributes, memo } from 'react';
 import styled from 'styled-components';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  children?: never;
-  direction?: 'horizontal' | 'vertical';
+  direction: 'horizontal' | 'vertical';
   size: number;
 }
 
-export const Spacing = memo(function Spacing({ direction = 'vertical', size, ...props }: Props) {
-  return <StyledSpacing direction={direction} size={size} />;
+const Spacing = memo(function Spacing({ direction = 'vertical', size, ...props }: Props) {
+  return <StyledSpacing direction={direction} size={size} {...props} />;
 });
+
+export default Spacing;
 
 interface StyledSpacingProps {
   readonly direction: 'horizontal' | 'vertical';
