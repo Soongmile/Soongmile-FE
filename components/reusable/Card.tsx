@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import colors from '@/styles/colors';
-import { Tag } from './Tag';
+import Tag from './Tag';
 import Spacing from './Spacing';
 
 const Card = () => {
