@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import theme from '@/styles/theme';
-import Spacing from '@/components/reusable/Spacing';
-import Tag from '@/components/reusable/Tag';
+import colors from '@/styles/colors';
+import Tag from './Tag';
+import Spacing from './Spacing';
 
 const Card = () => {
   return (
