@@ -2,17 +2,19 @@ import theme from '@/styles/theme';
 import styled from 'styled-components';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
-  readonly variant?: 'color' | 'gray';
+  readonly variant: 'color' | 'gray';
   readonly content: string;
 }
 
-export function Tag({ variant = 'color', content, ...props }: Props) {
+const Tag = ({ variant = 'color', content, ...props }: Props) => {
   return (
     <StyledTag variant={variant} {...props}>
       {content}
     </StyledTag>
   );
-}
+};
+
+export default Tag;
 
 interface StyledTagProps {
   readonly variant: 'color' | 'gray';
