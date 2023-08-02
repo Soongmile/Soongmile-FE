@@ -2,25 +2,24 @@ import { styled } from 'styled-components';
 import theme from '../../../styles/theme';
 
 export interface ButtonProps {
-    onClick?: () => void;
-    disabled?: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
-export const UploadBtn: React.FC<ButtonProps> = ({
-    onClick,
-    disabled = false,
-  }) => {
-    return (
-    <ButtonWrapper onClick={onClick} disabled={disabled}>업로드</ButtonWrapper>
-    )
-}
+export const UploadBtn = ({ onClick, disabled = false }: ButtonProps) => {
+  return (
+    <ButtonWrapper onClick={onClick} disabled={disabled}>
+      업로드
+    </ButtonWrapper>
+  );
+};
 
 const ButtonWrapper = styled.button<ButtonProps>`
   height: 56px;
   padding: 19px 32px;
   border-radius: 8px;
   border: none;
-  
+
   font-size: ${theme.fontStyles.Text_L.fontSize}px;
   font-weight: ${theme.fontStyles.Text_L.fontWeight};
   color: white;
@@ -29,7 +28,7 @@ const ButtonWrapper = styled.button<ButtonProps>`
   background-color: ${theme.colors.primary};
 
   &:disabled {
-      background-color: ${theme.colors.primary_disabled};
+    background-color: ${theme.colors.primary_disabled};
   }
 
   &:hover {

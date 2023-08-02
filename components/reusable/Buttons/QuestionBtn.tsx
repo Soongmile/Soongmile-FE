@@ -3,23 +3,23 @@ import theme from '../../../styles/theme';
 import { ButtonProps } from './UploadBtn';
 import PencilIcon from '../../../assets/icons/Pencil.svg';
 
-export const QuestionBtn: React.FC<ButtonProps> = ({ onClick }) => {
-    return (
+export const QuestionBtn = ({ onClick }: ButtonProps) => {
+  return (
     <ButtonWrapper onClick={onClick}>
-        <IconWrapper>
-            <PencilIcon alt="연필" width="24" height="24"/>
-        </IconWrapper>
-        질문하기
+      <IconWrapper>
+        <PencilIcon alt="연필" width="24" height="24" />
+      </IconWrapper>
+      질문하기
     </ButtonWrapper>
-    )
-}
+  );
+};
 
 const ButtonWrapper = styled.button<ButtonProps>`
   height: 56px;
   padding: 16px 16px;
   border-radius: 100px;
   border: none;
-  
+
   font-size: ${theme.fontStyles.Text_L.fontSize}px;
   font-weight: ${theme.fontStyles.Text_L.fontWeight};
   color: white;
