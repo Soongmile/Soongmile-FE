@@ -9,9 +9,11 @@ const StackTagsWrap = forwardRef(
 
 const StyledStackTagsWrap = styled.div`
   display: flex;
-  width: 100%;
+  width: 216px;
+  margin-left: 32px;
   flex-direction: row;
   overflow-x: scroll;
+  scroll-behavior: smooth;
   -webkit-scrollbar: no-button;
   &::-webkit-scrollbar {
     display: none;
