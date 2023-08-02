@@ -8,22 +8,22 @@ interface TextInputProps {
   height?: string;
   hasError?: boolean;
   errorMessage?: string;
-};
+}
 
-export const TextInput: React.FC<TextInputProps> = ({
-  placeholder = "",
-  width = "630px",
-  height = "46px",
+export const TextInput = ({
+  placeholder = '',
+  width = '630px',
+  height = '46px',
   hasError = false,
-  errorMessage = "",
-}) => {
+  errorMessage = '',
+}: TextInputProps) => {
   return (
     <>
       <InputBox
         placeholder={placeholder}
         width={width}
         height={height}
-        className={hasError ? "has-error" : ""}
+        className={hasError ? 'has-error' : ''}
       />
       {hasError && errorMessage && (
         <ErrorMessage>{errorMessage}</ErrorMessage> // 에러 메시지 출력
@@ -32,7 +32,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   );
 };
 
-const InputBox = styled.input<{ width: string; height: string; }>`
+const InputBox = styled.input<{ width: string; height: string }>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   padding-left: 24px;
@@ -40,7 +40,7 @@ const InputBox = styled.input<{ width: string; height: string; }>`
   border: 1px solid ${theme.colors.gray2};
   font-weight: ${theme.fontStyles.Text_M.fontWeight};
   font-size: ${theme.fontStyles.Text_M.fontSize}px;
-  
+
   &::placeholder {
     color: ${theme.colors.gray3};
     font-weight: ${theme.fontStyles.Text_M.fontWeight};
@@ -53,7 +53,7 @@ const InputBox = styled.input<{ width: string; height: string; }>`
 
   &:focus {
     outline: 1px solid ${theme.colors.primary};
-    box-shadow: 0px 1px 3px 1px rgba(176, 176, 176, 0.50);
+    box-shadow: 0px 1px 3px 1px rgba(176, 176, 176, 0.5);
   }
 
   &.has-error {
