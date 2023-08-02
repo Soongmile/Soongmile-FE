@@ -16,7 +16,7 @@ const Card = () => {
     const { current } = moveRef;
 
     if (current) {
-      current.scrollLeft = current.scrollWidth;
+      current.scrollLeft = current.scrollWidth - current.clientWidth;
     }
   };
 
