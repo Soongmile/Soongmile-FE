@@ -9,7 +9,7 @@ import StackTagsWrap from './atoms/StackTagsWrap';
 const Card = () => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const [scrollState, setScrollState] = useState<'left' | 'right'>('left');
+  const [scrollState, setScrollState] = useState<'left' | 'right'>('right');
 
   // onClick
   const moveRight = (moveRef: MutableRefObject<HTMLDivElement | null>) => {
@@ -173,6 +173,7 @@ const OverflowBoxRight = styled.div`
   height: 24px;
   background-image: url('gradientRight.svg');
 `;
+
 const OverflowBoxLeft = styled.div`
   position: absolute;
   top: 0;
@@ -190,6 +191,7 @@ const ButtonLeft = styled.div`
   width: 16px;
   background-image: url('leftArrow.svg');
 `;
+
 const ButtonRight = styled.div`
   height: 16px;
   width: 16px;
