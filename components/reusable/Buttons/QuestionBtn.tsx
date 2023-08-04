@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import theme from '../../../styles/theme';
-import { ButtonProps } from './UploadBtn';
+import { ButtonProps } from './SquareBtn';
 import PencilIcon from '../../../assets/icons/Pencil.svg';
 
 const QuestionBtn = ({ onClick }: ButtonProps) => {
