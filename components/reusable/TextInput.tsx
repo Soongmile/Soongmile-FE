@@ -27,9 +27,9 @@ const TextInput = ({
         className={hasError ? 'has-error' : ''}
         {...props}
       />
-      {hasError && errorMessage && (
+      {hasError && errorMessage ? (
         <ErrorMessage>{errorMessage}</ErrorMessage> // 에러 메시지 출력
-      )}
+      ) : null}
     </>
   );
 };
@@ -58,10 +58,9 @@ const InputBox = styled.input<{ width: string; height: string }>`
   &:focus {
     outline: 1px solid ${theme.colors.primary};
     box-shadow: 0px 1px 3px 1px rgba(176, 176, 176, 0.5);
-  }
-
-  &.has-error {
-    outline: 1px solid ${theme.colors.error};
+    &.has-error {
+      outline: 1px solid ${theme.colors.error};
+    }
   }
 `;
 
