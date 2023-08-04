@@ -1,5 +1,5 @@
 import Spacing from '@/components/reusable/Spacing';
-import TextInput from '@/components/reusable/TextInput';
+import TextInput from '@/components/reusable/Inputs/TextInput';
 import theme from '@/styles/theme';
 import type { NextPage } from 'next';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import QuestionTitle from './atoms/QuestionTitle';
 import FieldSelector from './atoms/FieldSelector';
 import MarkdownEditorSkeleton from './atoms/MarkdownEditorSkeleton';
+import StackSearch from './atoms/StackSearch';
 
 const MarkdownEditor = dynamic(() => import('./atoms/MarkdownEditor'), {
   ssr: false,
@@ -57,6 +58,7 @@ const QuestionWrite: NextPage = () => {
         <MarkdownEditor />
       </section>
       <FieldSelector />
+      <StackSearch />
     </Wrap>
   );
 };
@@ -84,7 +86,7 @@ const GuideTitleImg = styled.div`
   width: 24px;
   height: 24px;
 
-  background-image: url('developer_guide.svg');
+  background-image: url('img/developer_guide.svg');
 `;
 
 const GuideTitle = styled.div`
