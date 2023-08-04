@@ -1,16 +1,15 @@
 import { styled } from 'styled-components';
 import theme from '../../styles/theme';
-import colors from '../../styles/colors';
 
 interface TextInputProps {
-  placeholder?: string;
-  width?: string;
-  height?: string;
-  hasError?: boolean;
-  errorMessage?: string;
+  placeholder: string;
+  width: string;
+  height: string;
+  hasError: boolean;
+  errorMessage: string;
 }
 
-export const TextInput = ({
+const TextInput = ({
   placeholder = '',
   width = '630px',
   height = '46px',
@@ -31,6 +30,8 @@ export const TextInput = ({
     </>
   );
 };
+
+export default TextInput;
 
 const InputBox = styled.input<{ width: string; height: string }>`
   width: ${({ width }) => width};
