@@ -1,11 +1,12 @@
 import { styled } from 'styled-components';
 import theme from '../../../styles/theme';
 import { ButtonProps } from './UploadBtn';
-import PencilIcon from '../../../assets/icons/Pencil.svg';
 
-export const SignoutBtn = ({ onClick }: ButtonProps) => {
+const SignoutBtn = ({ onClick }: ButtonProps) => {
   return <ButtonWrapper onClick={onClick}>탈퇴하기</ButtonWrapper>;
 };
+
+export default SignoutBtn;
 
 const ButtonWrapper = styled.button<ButtonProps>`
   height: 40px;
