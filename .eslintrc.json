@@ -15,6 +15,10 @@
     "react": {
       "version": "detect"
     },
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": true, "optionalDependencies": false, "peerDependencies": false }
+    ],
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -37,7 +41,7 @@
     "project": ["tsconfig.json"],
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "prettier"],
+  "plugins": ["react", "react-hooks", "prettier", "import"],
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
