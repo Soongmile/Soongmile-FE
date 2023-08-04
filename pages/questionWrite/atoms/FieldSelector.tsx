@@ -2,22 +2,13 @@ import styled from 'styled-components';
 import theme from '@/styles/theme';
 import Spacing from '@/components/reusable/Spacing';
 import ToggleBtn from '@/components/reusable/Buttons/ToggleBtn';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import fieldListState from '@/states/fieldListState';
 import QuestionTitle from './QuestionTitle';
 
 const FieldSelector = () => {
-  interface FieldListType {
-    [key: string]: boolean;
-  }
-
-  const [fieldList, setFieldList] = useState<FieldListType>({
-    PM: true,
-    DESIGN: true,
-    MOBILE: true,
-    BE: true,
-    FE: true,
-    SCHOOL: true,
-  });
+  const [fieldList, setFieldList] = useRecoilState(fieldListState);
 
   const toggleBtnOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newFieldList = { ...fieldList };
@@ -31,6 +22,8 @@ const FieldSelector = () => {
         } else if (count < 3) {
           newFieldList[newField] = false;
           setFieldList(newFieldList);
+        } else if (count >= 3) {
+          alert('최대 3개까지 선택할 수 있습니다.');
         }
       }
     }
