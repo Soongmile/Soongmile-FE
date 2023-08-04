@@ -4,6 +4,7 @@ import theme from '@/styles/theme';
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
+import SquareBtn from '@/components/reusable/Buttons/SquareBtn';
 import QuestionTitle from './atoms/QuestionTitle';
 import FieldSelector from './atoms/FieldSelector';
 import MarkdownEditorSkeleton from './atoms/MarkdownEditorSkeleton';
@@ -59,6 +60,9 @@ const QuestionWrite: NextPage = () => {
       </section>
       <FieldSelector />
       <StackSearch />
+      <Spacing size={64} direction="vertical" />
+      <SquareBtn>업로드</SquareBtn>
+      <Spacing size={64} direction="vertical" />
     </Wrap>
   );
 };
@@ -66,7 +70,7 @@ const QuestionWrite: NextPage = () => {
 export default QuestionWrite;
 
 const Wrap = styled.div`
-  margin: 0px 400px;
+  margin: 0px auto;
   width: 640px;
   height: max-content;
 `;

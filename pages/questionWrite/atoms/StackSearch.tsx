@@ -132,7 +132,6 @@ const StackSearch = () => {
           <SearchTag name={item} />
         ))}
       </SearchTagsWrap>
-      <Spacing size={64} direction="vertical" />
     </section>
   );
 };
