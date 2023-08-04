@@ -1,4 +1,4 @@
-import colors from '@/styles/colors';
+import theme from '@/styles/theme';
 import styled from 'styled-components';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
@@ -26,20 +26,20 @@ const StyledTag = styled.span<StyledTagProps>`
   border-radius: ${(props) => radiusSize[props.variant]};
   height: 24px;
   min-width: fit-content;
-  font-size: 12px;
+  font-size: ${theme.fontStyles.Caption.fontSize}px;
   border: none;
   padding: 5px 12px;
   margin: 0;
 `;
 
 const backgroundColor = {
-  color: colors.primarybg,
-  gray: colors.graybg,
+  color: theme.colors.primary_tag,
+  gray: theme.colors.black_tag,
 };
 
 const textColor = {
-  color: colors.primary,
-  gray: colors.gray3,
+  color: theme.colors.primary,
+  gray: theme.colors.gray3,
 };
 
 const radiusSize = {
