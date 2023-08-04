@@ -2,11 +2,11 @@ import { styled } from 'styled-components';
 import theme from '../../styles/theme';
 
 interface TextInputProps {
-  placeholder: string;
+  placeholder?: string;
   width: string;
   height: string;
-  hasError: boolean;
-  errorMessage: string;
+  hasError?: boolean;
+  errorMessage?: string;
 }
 
 const TextInput = ({
