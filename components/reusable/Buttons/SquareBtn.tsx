@@ -1,15 +1,16 @@
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { styled } from 'styled-components';
 import theme from '../../../styles/theme';
 
-export interface ButtonProps {
-  onClick?: () => void;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  onClick?: (event: React.MouseEvent<HTMLElement>) => {};
   disabled?: boolean;
-  children: string;
+  children: ReactNode;
 }
 
-const UploadBtn = ({ onClick, disabled = false, children }: ButtonProps) => {
+const UploadBtn = ({ onClick, disabled = false, children, ...props }: ButtonProps) => {
   return (
-    <ButtonWrapper onClick={onClick} disabled={disabled}>
+    <ButtonWrapper onClick={onClick} disabled={disabled} {...props}>
       {children}
     </ButtonWrapper>
   );
