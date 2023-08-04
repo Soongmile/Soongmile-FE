@@ -3,7 +3,7 @@ import theme from '../../../styles/theme';
 import { ButtonProps } from './UploadBtn';
 import PencilIcon from '../../../assets/icons/Pencil.svg';
 
-export const QuestionBtn = ({ onClick }: ButtonProps) => {
+const QuestionBtn = ({ onClick }: ButtonProps) => {
   return (
     <ButtonWrapper onClick={onClick}>
       <IconWrapper>
@@ -13,6 +13,8 @@ export const QuestionBtn = ({ onClick }: ButtonProps) => {
     </ButtonWrapper>
   );
 };
+
+export default QuestionBtn;
 
 const ButtonWrapper = styled.button<ButtonProps>`
   height: 56px;
