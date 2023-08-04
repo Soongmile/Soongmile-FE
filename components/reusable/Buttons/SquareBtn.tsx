@@ -29,13 +29,10 @@ const ButtonWrapper = styled.button<ButtonProps>`
   color: white;
   cursor: pointer;
 
-  background-color: ${theme.colors.primary};
-
-  &:disabled {
-    background-color: ${theme.colors.primary_disabled};
-  }
+  background-color: ${(props) =>
+    props.able ? theme.colors.primary : theme.colors.primary_disabled};
 
   &:hover {
-    background-color: ${theme.colors.hovered};
+    background-color: ${(props) => (props.able ? theme.colors.hovered : '')};
   }
 `;
