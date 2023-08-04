@@ -1,7 +1,8 @@
 import { styled } from 'styled-components';
+import { InputHTMLAttributes } from 'react';
 import theme from '../../styles/theme';
 
-interface TextInputProps {
+interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   width: string;
   height: string;
@@ -15,6 +16,7 @@ const TextInput = ({
   height = '56px',
   hasError = false,
   errorMessage = '',
+  ...props
 }: TextInputProps) => {
   return (
     <>
@@ -23,6 +25,7 @@ const TextInput = ({
         width={width}
         height={height}
         className={hasError ? 'has-error' : ''}
+        {...props}
       />
       {hasError && errorMessage && (
         <ErrorMessage>{errorMessage}</ErrorMessage> // 에러 메시지 출력
