@@ -4,14 +4,19 @@ import styled from 'styled-components';
 
 interface QuestionTitleProps {
   titleName: string;
+  isSVG?: boolean;
 }
 
-const QuestionTitle = ({ titleName }: QuestionTitleProps) => {
+const QuestionTitle = ({ titleName, isSVG = true }: QuestionTitleProps) => {
   return (
     <TitleTitleWrap>
       <TitleTitle>{titleName}</TitleTitle>
-      <Spacing size={4} direction="horizontal" />
-      <TitleEllipse />
+      {isSVG && (
+        <>
+          <Spacing size={4} direction="horizontal" />
+          <TitleEllipse />
+        </>
+      )}
     </TitleTitleWrap>
   );
 };
