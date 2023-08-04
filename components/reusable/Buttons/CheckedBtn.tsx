@@ -2,9 +2,9 @@ import { styled } from 'styled-components';
 import theme from '../../../styles/theme';
 import { ButtonProps } from './SquareBtn';
 
-const CheckedBtn = ({ onClick, disabled = false, children }: ButtonProps) => {
+const CheckedBtn = ({ onClick, disabled = false, children, ...props }: ButtonProps) => {
   return (
-    <ButtonWrapper onClick={onClick} disabled={disabled}>
+    <ButtonWrapper onClick={onClick} disabled={disabled} {...props}>
       {children}
     </ButtonWrapper>
   );
