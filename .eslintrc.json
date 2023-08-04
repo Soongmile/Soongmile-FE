@@ -64,6 +64,7 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "react/require-default-props": 0
   }
 }
