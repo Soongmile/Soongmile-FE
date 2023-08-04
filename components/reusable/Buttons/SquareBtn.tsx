@@ -3,20 +3,20 @@ import { styled } from 'styled-components';
 import theme from '../../../styles/theme';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  onClick?: (event: React.MouseEvent<HTMLElement>) => {};
-  disabled?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  able?: boolean;
   children: ReactNode;
 }
 
-const UploadBtn = ({ onClick, disabled = false, children, ...props }: ButtonProps) => {
+const SquareBtn = ({ onClick, able = true, children, ...props }: ButtonProps) => {
   return (
-    <ButtonWrapper onClick={onClick} disabled={disabled} {...props}>
+    <ButtonWrapper onClick={onClick} able={able} {...props}>
       {children}
     </ButtonWrapper>
   );
 };
 
-export default UploadBtn;
+export default SquareBtn;
 
 const ButtonWrapper = styled.button<ButtonProps>`
   height: 56px;
