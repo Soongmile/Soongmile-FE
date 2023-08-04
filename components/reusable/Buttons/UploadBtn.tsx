@@ -6,13 +6,15 @@ export interface ButtonProps {
   disabled?: boolean;
 }
 
-export const UploadBtn = ({ onClick, disabled = false }: ButtonProps) => {
+const UploadBtn = ({ onClick, disabled = false }: ButtonProps) => {
   return (
     <ButtonWrapper onClick={onClick} disabled={disabled}>
       업로드
     </ButtonWrapper>
   );
 };
+
+export default UploadBtn;
 
 const ButtonWrapper = styled.button<ButtonProps>`
   height: 56px;

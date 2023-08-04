@@ -2,13 +2,15 @@ import { styled } from 'styled-components';
 import theme from '../../../styles/theme';
 import { ButtonProps } from './UploadBtn';
 
-export const CheckedBtn = ({ onClick, disabled = false }: ButtonProps) => {
+const CheckedBtn = ({ onClick, disabled = false }: ButtonProps) => {
   return (
     <ButtonWrapper onClick={onClick} disabled={disabled}>
       중복확인
     </ButtonWrapper>
   );
 };
+
+export default CheckedBtn;
 
 const ButtonWrapper = styled.button<ButtonProps>`
   height: 56px;
