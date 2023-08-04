@@ -2,8 +2,12 @@ import { styled } from 'styled-components';
 import theme from '../../../styles/theme';
 import { ButtonProps } from './SquareBtn';
 
-const SignoutBtn = ({ onClick, children }: ButtonProps) => {
-  return <ButtonWrapper onClick={onClick}>{children}</ButtonWrapper>;
+const SignoutBtn = ({ onClick, children, ...props }: ButtonProps) => {
+  return (
+    <ButtonWrapper onClick={onClick} {...props}>
+      {children}
+    </ButtonWrapper>
+  );
 };
 
 export default SignoutBtn;

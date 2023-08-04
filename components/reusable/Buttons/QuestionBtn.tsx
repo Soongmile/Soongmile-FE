@@ -3,9 +3,9 @@ import theme from '../../../styles/theme';
 import { ButtonProps } from './SquareBtn';
 import PencilIcon from '../../../assets/icons/Pencil.svg';
 
-const QuestionBtn = ({ onClick, children }: ButtonProps) => {
+const QuestionBtn = ({ onClick, children, ...props }: ButtonProps) => {
   return (
-    <ButtonWrapper onClick={onClick}>
+    <ButtonWrapper onClick={onClick} {...props}>
       <IconWrapper>
         <PencilIcon alt="연필" width="24" height="24" />
       </IconWrapper>
