@@ -4,12 +4,13 @@ import theme from '../../../styles/theme';
 export interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
+  children: string;
 }
 
-const UploadBtn = ({ onClick, disabled = false }: ButtonProps) => {
+const UploadBtn = ({ onClick, disabled = false, children }: ButtonProps) => {
   return (
     <ButtonWrapper onClick={onClick} disabled={disabled}>
-      업로드
+      {children}
     </ButtonWrapper>
   );
 };
