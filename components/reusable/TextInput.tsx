@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from '../../styles/theme';
+import { styled } from 'styled-components';
 
 interface TextInputProps {
   placeholder?: string;
@@ -11,8 +12,8 @@ interface TextInputProps {
 
 const TextInput = ({
   placeholder = '',
-  width = '630px',
-  height = '46px',
+  width = '640px',
+  height = '56px',
   hasError = false,
   errorMessage = '',
 }: TextInputProps) => {
@@ -43,7 +44,7 @@ const InputBox = styled.input<{ width: string; height: string }>`
   font-size: ${theme.fontStyles.Text_M.fontSize}px;
 
   &::placeholder {
-    color: ${theme.colors.gray3};
+    color: ${theme.colors.gray2};
     font-weight: ${theme.fontStyles.Text_M.fontWeight};
     font-size: ${theme.fontStyles.Text_M.fontSize}px;
   }
