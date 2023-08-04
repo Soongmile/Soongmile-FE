@@ -1,10 +1,11 @@
+import { ReactNode } from 'react';
 import { styled } from 'styled-components';
 import theme from '../../../styles/theme';
 
 export interface ButtonProps {
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => {};
   disabled?: boolean;
-  children: string;
+  children: ReactNode;
 }
 
 const UploadBtn = ({ onClick, disabled = false, children }: ButtonProps) => {

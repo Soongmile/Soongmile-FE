@@ -3,13 +3,13 @@ import theme from '../../../styles/theme';
 import { ButtonProps } from './SquareBtn';
 import PencilIcon from '../../../assets/icons/Pencil.svg';
 
-const QuestionBtn = ({ onClick }: ButtonProps) => {
+const QuestionBtn = ({ onClick, children }: ButtonProps) => {
   return (
     <ButtonWrapper onClick={onClick}>
       <IconWrapper>
         <PencilIcon alt="연필" width="24" height="24" />
       </IconWrapper>
-      질문하기
+      {children}
     </ButtonWrapper>
   );
 };
