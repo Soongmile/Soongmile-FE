@@ -30,10 +30,9 @@ const Card = () => {
 
   // EventListener
   const handleScroll = (moveRef: MutableRefObject<HTMLDivElement | null>) => {
-    const { current } = moveRef;
-
-    if (current) {
-      if (current.scrollLeft <= (current.scrollWidth - current.clientWidth) / 2) {
+    if (moveRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = moveRef.current;
+      if (scrollLeft <= (scrollWidth - clientWidth) / 2) {
         setScrollState('right');
       } else {
         setScrollState('left');
@@ -42,15 +41,15 @@ const Card = () => {
   };
 
   useEffect(() => {
-    const { current } = ref;
+    const currentRef = ref.current;
 
-    if (current) {
-      current.addEventListener('scroll', () => handleScroll(ref));
+    if (currentRef) {
+      currentRef.addEventListener('scroll', () => handleScroll(ref));
     }
     return () => {
-      if (current) {
-        window.removeEventListener('scroll', () => handleScroll(ref));
-      } // clean up
+      if (currentRef) {
+        currentRef.removeEventListener('scroll', () => handleScroll(ref));
+      }
     };
   }, []);
 
