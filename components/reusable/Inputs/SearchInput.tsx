@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { InputHTMLAttributes } from 'react';
+import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
 import theme from '../../../styles/theme';
 
 interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,19 +8,19 @@ interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
   height?: string;
 }
 
-const SearchInput = ({
-  placeholder = '',
-  width = '640px',
-  height = '56px',
-  ...props
-}: SearchInputProps) => {
-  return (
-    <SearchInputWrap>
-      <InputBox placeholder={placeholder} width={width} height={height} {...props} />
-      <SearchImg />
-    </SearchInputWrap>
-  );
-};
+const SearchInput = forwardRef(
+  (
+    { placeholder = '', width = '640px', height = '56px', ...props }: SearchInputProps,
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    return (
+      <SearchInputWrap ref={ref}>
+        <InputBox placeholder={placeholder} width={width} height={height} {...props} />
+        <SearchImg />
+      </SearchInputWrap>
+    );
+  },
+);
 
 export default SearchInput;
 

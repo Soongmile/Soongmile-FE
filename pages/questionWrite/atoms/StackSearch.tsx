@@ -23,16 +23,23 @@ const StackSearch = () => {
   const [keyItems, setKeyItems] = useState<string[]>(allStackList);
 
   const ref = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // 검색창 외부 클릭시 검색창 닫힘
-  const handleAutoSearch = (searchRef: MutableRefObject<HTMLDivElement | null>, e: MouseEvent) => {
-    if (searchRef.current && e) {
-      if (!searchRef.current.contains(e.target as Node)) {
+  const handleAutoSearch = (
+    searchRef: MutableRefObject<HTMLDivElement | null>,
+    searchInputRef: MutableRefObject<HTMLInputElement | null>,
+    e: MouseEvent,
+  ) => {
+    if (searchRef.current && searchInputRef.current && e) {
+      if (
+        !searchRef.current.contains(e.target as Node) &&
+        !searchInputRef.current.contains(e.target as Node)
+      ) {
         if (autoSearch) {
+          setAutoSearch(false);
           setTimeout(() => {
             setDisplay(false);
-            setAutoSearch(false);
-
             // KeyItems 초기화
             setKeyItems(allStackList);
           }, 200);
@@ -42,11 +49,11 @@ const StackSearch = () => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', (e) => handleAutoSearch(ref, e));
+    document.addEventListener('mousedown', (e) => handleAutoSearch(ref, inputRef, e));
     // document.addEventListener('touchstart', handler); // 모바일 대응
 
     return () => {
-      document.removeEventListener('mousedown', (e) => handleAutoSearch(ref, e));
+      document.removeEventListener('mousedown', (e) => handleAutoSearch(ref, inputRef, e));
       // document.removeEventListener('touchstart', handler); // 모바일 대응
     };
   });
@@ -64,7 +71,6 @@ const StackSearch = () => {
   }, [fieldList]);
 
   useEffect(() => {
-    console.log(allStackList);
     setKeyItems(allStackList);
   }, [allStackList]);
 
@@ -110,14 +116,15 @@ const StackSearch = () => {
           </AutoSearchContainer>
         )}
         <SearchInput
+          ref={inputRef}
           onClick={() => {
             if (autoSearch) {
-              setAutoSearch(false);
+              setAutoSearch(!autoSearch);
               setTimeout(() => {
                 setDisplay(false);
-              }, 300);
+              }, 200);
             } else {
-              setAutoSearch(true);
+              setAutoSearch(!autoSearch);
               setDisplay(true);
             }
           }}
