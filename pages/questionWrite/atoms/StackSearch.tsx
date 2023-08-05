@@ -77,10 +77,10 @@ const StackSearch = () => {
 
   // 검색 기능
   const updateData = () => {
-    const b = allStackList.filter((list: string) =>
+    const filtered = allStackList.filter((list: string) =>
       list.toLowerCase().includes(keyword.toLowerCase()),
     );
-    setKeyItems(b);
+    setKeyItems(filtered);
   };
 
   useEffect(() => {
