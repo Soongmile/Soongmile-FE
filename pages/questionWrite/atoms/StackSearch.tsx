@@ -40,8 +40,9 @@ const StackSearch = () => {
           setAutoSearch(false);
           setTimeout(() => {
             setDisplay(false);
-            // KeyItems 초기화
-            setKeyItems(allStackList);
+            // keyword 초기화
+            // -> keyword.len === 0이면, 전체 리스트자동 초기화
+            setKeyword('');
           }, 200);
         }
       }
@@ -87,10 +88,6 @@ const StackSearch = () => {
       // KeyItems 초기화
       setKeyItems(allStackList);
     }
-    // else {
-    //   setAutoSearch(true);
-    //   setDisplay(true);
-    // }
     const debounce = setTimeout(() => {
       if (keyword) updateData();
     }, 200);
