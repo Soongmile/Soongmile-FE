@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import { InputHTMLAttributes } from 'react';
-import theme from '../../styles/theme';
+import theme from '../../../styles/theme';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
