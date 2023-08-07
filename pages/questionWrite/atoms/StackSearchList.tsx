@@ -34,7 +34,7 @@ const StyledStackSearchList = styled.div`
   padding-left: 21px;
 
   color: ${theme.colors.gray3};
-  font-size: ${theme.fontStyles.Text_M.fontSize};
+  font-size: ${theme.fontStyles.Text_M.fontSize}px;
   font-weight: ${theme.fontStyles.Text_M.fontWeight};
 
   cursor: pointer;

@@ -38,7 +38,7 @@ const StyledSearchTag = styled.div`
   border-radius: 8px;
   background-color: ${theme.colors.black_tag};
   color: ${theme.colors.gray3};
-  font-size: ${theme.fontStyles.Caption.fontSize};
+  font-size: ${theme.fontStyles.Caption.fontSize}px;
   font-size: ${theme.fontStyles.Caption.fontWeight};
 `;
 

@@ -113,18 +113,18 @@ const Guide = styled.div`
 
 const GuideP = styled.p`
   color: ${theme.colors.primary};
-  font-size: ${theme.fontStyles.Text_S.fontSize};
+  font-size: ${theme.fontStyles.Text_S.fontSize}px;
   font-size: ${theme.fontStyles.Text_S.fontWeight};
 `;
 
 const Info = styled.div`
   color: ${theme.colors.gray3};
-  font-size: ${theme.fontStyles.Text_M.fontSize};
+  font-size: ${theme.fontStyles.Text_M.fontSize}px;
   font-weight: ${theme.fontStyles.Text_M.fontWeight};
 `;
 
 const Tip = styled.div`
-  font-size: ${theme.fontStyles.Text_S.fontSize};
+  font-size: ${theme.fontStyles.Text_S.fontSize}px;
   font-weight: ${theme.fontStyles.Text_S.fontWeight};
 `;
 

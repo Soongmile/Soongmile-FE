@@ -28,7 +28,7 @@ const TitleTitleWrap = styled.div`
 `;
 
 const TitleTitle = styled.div`
-  font-size: ${theme.fontStyles.Text_L.fontSize};
+  font-size: ${theme.fontStyles.Text_L.fontSize}px;
   font-weight: ${theme.fontStyles.Text_L.fontWeight};
 `;
 
