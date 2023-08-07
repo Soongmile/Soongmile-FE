@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import theme from '@/styles/theme';
 import Spacing from '@/components/reusable/Spacing';
 import ToggleBtn from '@/components/reusable/Buttons/ToggleBtn';
-import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import fieldListState from '@/states/fieldListState';
 import QuestionTitle from './QuestionTitle';
@@ -28,10 +27,6 @@ const FieldSelector = () => {
       }
     }
   };
-
-  useEffect(() => {
-    console.log(fieldList);
-  }, [fieldList]);
 
   return (
     <section>
@@ -111,10 +106,11 @@ export default FieldSelector;
 const QuestionTitleWrap = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 const Tip = styled.div`
-  font-size: ${theme.fontStyles.Text_S.fontSize};
+  font-size: ${theme.fontStyles.Text_S.fontSize}px;
   font-weight: ${theme.fontStyles.Text_S.fontWeight};
 `;
 
