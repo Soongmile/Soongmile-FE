@@ -31,7 +31,7 @@ interface StyledSideBarListProps {
 }
 
 const StyledSideBarList = styled.a<StyledSideBarListProps>`
-  font-size: ${theme.fontStyles.Text_M.fontSize};
+  font-size: ${theme.fontStyles.Text_M.fontSize}px;
   font-weight: ${(props) =>
     props.currentsidebar === props.href
       ? theme.fontStyles.Text_L.fontWeight
