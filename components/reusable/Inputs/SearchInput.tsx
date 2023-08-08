@@ -6,16 +6,29 @@ interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   width?: string;
   height?: string;
+  border?: boolean;
 }
 
 const SearchInput = forwardRef(
   (
-    { placeholder = '', width = '640px', height = '56px', ...props }: SearchInputProps,
+    {
+      placeholder = '',
+      width = '640px',
+      height = '56px',
+      border = true,
+      ...props
+    }: SearchInputProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
-      <SearchInputWrap ref={ref}>
-        <InputBox placeholder={placeholder} width={width} height={height} {...props} />
+      <SearchInputWrap width={width} height={height} ref={ref}>
+        <InputBox
+          placeholder={placeholder}
+          width={width}
+          height={height}
+          border={border}
+          {...props}
+        />
         <SearchImg />
       </SearchInputWrap>
     );
@@ -24,12 +37,12 @@ const SearchInput = forwardRef(
 
 export default SearchInput;
 
-const InputBox = styled.input<{ width: string; height: string }>`
+const InputBox = styled.input<{ width: string; height: string; border: boolean }>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   padding-left: 24px;
   border-radius: 16px;
-  border: 1px solid ${theme.colors.gray2};
+  border: ${({ border }) => (border ? `1px solid ${theme.colors.gray2}` : 'none')};
   font-weight: ${theme.fontStyles.Text_M.fontWeight};
   font-size: ${theme.fontStyles.Text_M.fontSize}px;
 
@@ -49,7 +62,9 @@ const InputBox = styled.input<{ width: string; height: string }>`
   }
 `;
 
-const SearchInputWrap = styled.div`
+const SearchInputWrap = styled.div<{ width: string; height: string }>`
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   position: relative;
   display: flex;
   justify-content: center;
@@ -58,7 +73,7 @@ const SearchInputWrap = styled.div`
 
 const SearchImg = styled.div`
   position: absolute;
-  right: 13px;
+  right: 24px;
   width: 30px;
   height: 30px;
   background-image: url('/img/search.svg');
