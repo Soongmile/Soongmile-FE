@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { GlobalStyle } from '../styles/globalStyle';
+import Footer from '../components/reusable/Footer';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient();
@@ -11,6 +12,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <RecoilRoot>
         <GlobalStyle />
         <Component {...pageProps} />
+        <Footer />
       </RecoilRoot>
     </QueryClientProvider>
   );

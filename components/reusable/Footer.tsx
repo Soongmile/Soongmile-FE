@@ -13,19 +13,19 @@ const Footer = () => {
       <FooterFlex>
         <WhiteLogo />
         <TextFlex>
-          <WHiteText size="L">Contact</WHiteText>
-          <WHiteText size="M">Soongcharo@gmail.com</WHiteText>
+          <WhiteText size="L">Contact</WhiteText>
+          <WhiteText size="M">Soongcharo@gmail.com</WhiteText>
         </TextFlex>
       </FooterFlex>
       <Spacing direction="vertical" size={150} />
       <Line />
       <Spacing direction="vertical" size={32} />
       <FooterFlex>
-        <WHiteText size="M">Copyright ⓒ Soongcharo All Rights Reserved.</WHiteText>
+        <WhiteText size="M">Copyright ⓒ Soongcharo All Rights Reserved.</WhiteText>
         <TextFlex>
-          <WHiteText size="M">이용약관</WHiteText>
-          <WHiteText size="M">숭차로 운영 정책</WHiteText>
-          <WHiteText size="L">개인정보 처리방침</WHiteText>
+          <WhiteText size="M">이용약관</WhiteText>
+          <WhiteText size="M">숭차로 운영 정책</WhiteText>
+          <WhiteText size="L">개인정보 처리방침</WhiteText>
         </TextFlex>
       </FooterFlex>
     </Container>
@@ -64,7 +64,7 @@ const TextFlex = styled.div`
   gap: 30px;
 `;
 
-const WHiteText = styled.div<TextProps>`
+const WhiteText = styled.div<TextProps>`
   color: ${theme.colors.white};
   font-size: ${(props) =>
     props.size === 'M' ? theme.fontStyles.Text_M.fontSize : theme.fontStyles.Text_L.fontSize}px;
