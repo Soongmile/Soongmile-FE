@@ -21,10 +21,10 @@ const Header = () => {
         <NavLink active={pathname === '/questionWrite'} href="/questionWrite">
           질문
         </NavLink>
-        <NavLink active={pathname === ''} href="/">
+        <NavLink active={pathname === '/'} href="/">
           포인트
         </NavLink>
-        <NavLink active={pathname === ''} href="/">
+        <NavLink active={pathname === '/'} href="/">
           커피챗
         </NavLink>
       </Nav>
