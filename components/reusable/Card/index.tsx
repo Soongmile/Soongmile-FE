@@ -55,7 +55,9 @@ const Card = () => {
 
   return (
     <StyledCard>
-      <Tag variant="color" content="직무" />
+      <Tag color="color" size="small">
+        <p>직무</p>
+      </Tag>
       <Spacing direction="vertical" size={16} />
       <Title>제목입니다제목입니다제목입니다제목입니다제목입니다제목입니다</Title>
       <Spacing direction="vertical" size={16} />
@@ -67,17 +69,29 @@ const Card = () => {
       <Spacing direction="vertical" size={16} />
       <StackTagsArea>
         <StackTagsWrap ref={ref}>
-          <Tag variant="gray" content="스택2222" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
         </StackTagsWrap>
         {useIsOverflow({ ref }) && scrollState === 'right' && (
           <OverflowBoxRight>
