@@ -39,7 +39,7 @@ const Container = styled.div`
   height: 352px;
   padding-left: 240px;
   padding-right: 240px;
-  position: absolute;
+  position: relative;
   bottom: 0;
   background-color: ${theme.colors.footer};
   border-bottom: 2px solid ${theme.colors.gray1};
