@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 // import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Spacing from '@/components/reusable/Spacing';
-import Search from './atoms/Search';
+import Search from '../../components/reusable/Search';
 import Question from './atoms/Question';
 import Answer from './atoms/Answer';
 import MyAnswer from './atoms/MyAnswer';

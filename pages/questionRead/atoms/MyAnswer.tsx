@@ -1,8 +1,19 @@
 import SquareBtn from '@/components/reusable/Buttons/SquareBtn';
-import TextInput from '@/components/reusable/Inputs/TextInput';
+import MarkdownEditorSkeleton from '@/components/reusable/MarkDown/MarkdownEditorSkeleton';
 import Spacing from '@/components/reusable/Spacing';
 import theme from '@/styles/theme';
+import dynamic from 'next/dynamic';
 import styled from 'styled-components';
+
+const MarkdownEditor = dynamic(
+  () => import('../../../components/reusable/MarkDown/MarkdownEditor'),
+  {
+    ssr: false,
+    loading: () => {
+      return <MarkdownEditorSkeleton />;
+    },
+  },
+);
 
 const MyAnswer = () => {
   return (
@@ -23,11 +34,7 @@ const MyAnswer = () => {
           </Guide>
         </section>
         <Spacing size={32} direction="vertical" />
-        <TextInput
-          placeholder="답변 작성 시 답변 가이드를 지켜주세요."
-          width="944px"
-          height="240px"
-        />
+        <MarkdownEditor />
         <Spacing size={32} direction="vertical" />
         <AlignedSquareBtn>답변 게시</AlignedSquareBtn>
       </MyAnswerWrap>

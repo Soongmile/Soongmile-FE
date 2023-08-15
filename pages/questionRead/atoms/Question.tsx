@@ -1,4 +1,5 @@
 import Spacing from '@/components/reusable/Spacing';
+import Tag from '@/components/reusable/Tag';
 import theme from '@/styles/theme';
 import styled from 'styled-components';
 
@@ -6,7 +7,20 @@ const Question = () => {
   return (
     <StyledQuestion>
       <ContentWrap>
-        <TagWrap />
+        <TagWrap>
+          <Tag color="color" size="small">
+            <p>학교 생활</p>
+          </Tag>
+          <Spacing direction="horizontal" size={16} />
+          <Tag color="gray" size="small">
+            <p>공부법</p>
+          </Tag>
+          <Spacing direction="horizontal" size={16} />
+          <Tag color="gray" size="small">
+            <p>경영학</p>
+          </Tag>
+        </TagWrap>
+        <Spacing direction="vertical" size={8} />
         <QuestionContentWrap>
           <TitleWrap>
             <Title>{`Q. ${'경영학 인강이나 공부 방법'}`}</Title>
@@ -49,7 +63,10 @@ const ContentWrap = styled.div`
   margin: 0 auto;
 `;
 
-const TagWrap = styled.div``;
+const TagWrap = styled.div`
+  width: 100%;
+  display: flex;
+`;
 
 const QuestionContentWrap = styled.div`
   width: 100%;
