@@ -5,12 +5,12 @@ import type { NextPage } from 'next';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import SquareBtn from '@/components/reusable/Buttons/SquareBtn';
+import MarkdownEditorSkeleton from '@/components/reusable/MarkDown/MarkdownEditorSkeleton';
 import QuestionTitle from './atoms/QuestionTitle';
 import FieldSelector from './atoms/FieldSelector';
-import MarkdownEditorSkeleton from './atoms/MarkdownEditorSkeleton';
 import StackSearch from './atoms/StackSearch';
 
-const MarkdownEditor = dynamic(() => import('./atoms/MarkdownEditor'), {
+const MarkdownEditor = dynamic(() => import('../../components/reusable/MarkDown/MarkdownEditor'), {
   ssr: false,
   loading: () => {
     return <MarkdownEditorSkeleton />;
