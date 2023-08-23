@@ -10,7 +10,7 @@ const theme = {
     primary_disabled: 'rgba(0, 103, 148, 0.50)',
     primary_tag: 'rgba(0, 103, 148, 0.08)',
     black_tag: 'rgba(29, 29, 29, 0.08)',
-    gray0: '#000000',
+    gray0: '#F9FAFB',
     gray1: '#F2F4F6',
     gray2: '#B0B0B0',
     gray3: '#707070',
