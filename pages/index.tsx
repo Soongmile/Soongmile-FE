@@ -1,13 +1,7 @@
-import Card from '@/components/reusable/Card';
-import type { NextPage } from 'next';
+import type { NextPageWithLayout } from './_app';
 
-const Home: NextPage = () => {
-  return (
-    <>
-      <h1>Home Page</h1>
-      <Card />
-    </>
-  );
+const Home: NextPageWithLayout = () => {
+  return <h1>Home Page</h1>;
 };
 
 export default Home;
