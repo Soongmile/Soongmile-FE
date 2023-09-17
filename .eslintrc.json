@@ -28,6 +28,7 @@
         "alwaysTryTypes": true,
         "project": "./tsconfig.json"
       },
+      "import/order": "off",
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
