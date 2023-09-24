@@ -1,15 +1,17 @@
 import theme from '@/styles/theme';
+import { ReactElement } from 'react';
 import styled from 'styled-components';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
-  readonly variant: 'color' | 'gray';
-  readonly content: string;
+  color: 'color' | 'gray';
+  size: 'small' | 'big';
+  children: ReactElement;
 }
 
-const Tag = ({ variant = 'color', content, ...props }: Props) => {
+const Tag = ({ color = 'color', size = 'small', children, ...props }: Props) => {
   return (
-    <StyledTag variant={variant} {...props}>
-      {content}
+    <StyledTag color={color} size={size} {...props}>
+      {children}
     </StyledTag>
   );
 };
@@ -17,13 +19,14 @@ const Tag = ({ variant = 'color', content, ...props }: Props) => {
 export default Tag;
 
 interface StyledTagProps {
-  readonly variant: 'color' | 'gray';
+  color: 'color' | 'gray';
+  size: 'small' | 'big';
 }
 
 const StyledTag = styled.span<StyledTagProps>`
-  background-color: ${(props) => backgroundColor[props.variant]};
-  color: ${(props) => textColor[props.variant]};
-  border-radius: ${(props) => radiusSize[props.variant]};
+  background-color: ${(props) => backgroundColor[props.color]};
+  color: ${(props) => textColor[props.color]};
+  border-radius: ${(props) => radiusSize[props.size]};
   height: 24px;
   min-width: fit-content;
   font-size: ${theme.fontStyles.Caption.fontSize}px;
@@ -43,6 +46,6 @@ const textColor = {
 };
 
 const radiusSize = {
-  color: '8px',
-  gray: '100px',
+  small: '8px',
+  big: '100px',
 };
