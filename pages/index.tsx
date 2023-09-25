@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import Card from '@/components/reusable/Card';
+import { useState } from 'react';
 import type { NextPage } from 'next';
 import colors from '../styles/colors';
 import theme from '@/styles/theme';

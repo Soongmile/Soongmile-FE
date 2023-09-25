@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { styled } from 'styled-components';
 import theme from '../../styles/theme';
-import { usePathname } from 'next/navigation';
 import Logo from '../../assets/Logo.svg';
 
 interface LinkProps {

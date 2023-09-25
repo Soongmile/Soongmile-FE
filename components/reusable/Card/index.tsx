@@ -10,7 +10,7 @@ interface CardProps {
   id: number;
 }
 
-const Card = ({ id }: CardProps) => {
+const Card = (id: CardProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const [scrollState, setScrollState] = useState<'left' | 'right'>('right');
