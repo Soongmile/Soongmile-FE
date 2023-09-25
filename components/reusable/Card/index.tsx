@@ -6,7 +6,11 @@ import Tag from '../Tag';
 import Spacing from '../Spacing';
 import StackTagsWrap from './atoms/StackTagsWrap';
 
-const Card = () => {
+interface CardProps {
+  id: number;
+}
+
+const Card = ({ id }: CardProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const [scrollState, setScrollState] = useState<'left' | 'right'>('right');
