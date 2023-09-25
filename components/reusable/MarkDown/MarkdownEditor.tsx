@@ -1,17 +1,23 @@
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
-import { useRef } from 'react';
+import { RefObject, useRef } from 'react';
 
-const MarkdownEditor = () => {
+interface MarkdownEditorProps {
+  onChange: (editorRef: RefObject<Editor>) => void;
+}
+
+const MarkdownEditor = ({ onChange }: MarkdownEditorProps) => {
   const editorRef = useRef<Editor>(null);
 
   return (
     <Editor
       ref={editorRef}
+      onChange={() => onChange(editorRef)}
       // initialValue="hello react editor world!"
       previewStyle="tab"
       height="600px"
       initialEditType="markdown"
+      language="ko-KR"
       toolbarItems={[
         ['heading', 'bold', 'italic', 'strike'],
         ['hr', 'quote'],
