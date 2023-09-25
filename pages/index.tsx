@@ -2,6 +2,8 @@ import Card from '@/components/reusable/Card';
 import { useState } from 'react';
 import type { NextPage } from 'next';
 import { MAINPAGE_MENU_LIST } from '@/const';
+import SideBar from '@/components/reusable/SideBar';
+import Search from '@/components/reusable/Search';
 import colors from '../styles/colors';
 import theme from '@/styles/theme';
 import { styled } from 'styled-components';
@@ -9,8 +11,6 @@ import Spacing from '@/components/reusable/Spacing';
 import BannerMan from '../assets/BannerMan.svg';
 import Left from '../assets/icons/LeftArrow.svg';
 import Right from '../assets/icons/RightArrow.svg';
-import Search from '@/components/reusable/Search';
-import SideBar from '@/components/reusable/SideBar';
 
 const Home: NextPage = () => {
   const itemsPerPage = 6; // 한 페이지에 표시할 아이템 수
