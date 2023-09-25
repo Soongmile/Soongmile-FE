@@ -7,7 +7,7 @@ import Spacing from '../Spacing';
 import StackTagsWrap from './atoms/StackTagsWrap';
 
 interface CardProps {
-  id: number;
+  id?: number;
 }
 
 const Card = ({ id }: CardProps) => {
