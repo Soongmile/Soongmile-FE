@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Card from '@/components/reusable/Card';
 import type { NextPage } from 'next';
 import colors from '../styles/colors';
@@ -10,7 +11,6 @@ import Right from '../assets/icons/RightArrow.svg';
 import Search from '@/components/reusable/Search';
 import SideBar from '@/components/reusable/SideBar';
 import { MAINPAGE_MENU_LIST } from '@/const';
-import { useState } from 'react';
 
 const Home: NextPage = () => {
   const itemsPerPage = 6; // 한 페이지에 표시할 아이템 수
