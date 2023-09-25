@@ -7,7 +7,7 @@ import Spacing from '../Spacing';
 import StackTagsWrap from './atoms/StackTagsWrap';
 
 interface CardProps {
-  id?: number;
+  id: number;
 }
 
 const Card = ({ id }: CardProps) => {
@@ -110,7 +110,7 @@ const Card = ({ id }: CardProps) => {
       </StackTagsArea>
       <Spacing direction="vertical" size={16} />
       <InfoTextWrap>
-        <InfoText>{`${35}분전`}</InfoText>
+        <InfoText>{`${id}분전`}</InfoText>
         <InfoTwoTextWrap>
           <InfoText>{`조회수 ${100}`}</InfoText>
           <Spacing direction="horizontal" size={16} />
