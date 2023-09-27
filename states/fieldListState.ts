@@ -7,11 +7,11 @@ interface FieldListType {
 const fieldListState = atom<FieldListType>({
   key: 'fieldListState',
   default: {
-    PM: true,
+    PRODUCT_MANAGER: true,
     DESIGN: true,
     MOBILE: true,
-    BE: true,
-    FE: true,
+    BACKEND: true,
+    FRONTEND: true,
     SCHOOL: true,
   },
 });
