@@ -1,4 +1,6 @@
+import postFile from '@/apis/postFile';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import { HookCallback } from '@toast-ui/editor/types/editor';
 import { Editor } from '@toast-ui/react-editor';
 import { RefObject, useRef } from 'react';
 
@@ -8,6 +10,12 @@ interface MarkdownEditorProps {
 
 const MarkdownEditor = ({ onChange }: MarkdownEditorProps) => {
   const editorRef = useRef<Editor>(null);
+
+  const onUploadImage = async (blob: Blob, callback: HookCallback) => {
+    const url = await postFile(blob);
+    callback(url, blob.name);
+    return false;
+  };
 
   return (
     <Editor
@@ -22,11 +30,14 @@ const MarkdownEditor = ({ onChange }: MarkdownEditorProps) => {
         ['heading', 'bold', 'italic', 'strike'],
         ['hr', 'quote'],
         ['ul', 'ol', 'task', 'indent', 'outdent'],
-        ['table', 'link'],
+        ['table', 'image', 'link'],
         ['code', 'codeblock'],
         ['scrollSync'],
       ]}
       useCommandShortcut
+      hooks={{
+        addImageBlobHook: onUploadImage,
+      }}
     />
   );
 };
