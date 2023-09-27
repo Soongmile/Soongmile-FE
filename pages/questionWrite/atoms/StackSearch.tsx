@@ -12,7 +12,11 @@ import QuestionTitle from './QuestionTitle';
 import StackSearchList from './StackSearchList';
 import AutoSearchContainer from './AutoSearchContainer';
 
-const StackSearch = () => {
+interface StackSearchProps {
+  onChange: (value: string[]) => void;
+}
+
+const StackSearch = ({ onChange }: StackSearchProps) => {
   const fieldList = useRecoilValue(fieldListState);
   const searchTags = useRecoilValue(searchTagState);
 
@@ -59,6 +63,7 @@ const StackSearch = () => {
     };
   });
 
+  // 필드 바뀌면 -> 스택 리스트 변경
   useEffect(() => {
     setAllStackList([]);
     let newArr: string[] = [];
@@ -74,6 +79,10 @@ const StackSearch = () => {
   useEffect(() => {
     setKeyItems(allStackList);
   }, [allStackList]);
+
+  useEffect(() => {
+    onChange(searchTags);
+  }, [searchTags]);
 
   // 검색 기능
   const updateData = () => {
@@ -104,7 +113,7 @@ const StackSearch = () => {
       <SearchWrap>
         {display && (
           <AutoSearchContainer ref={ref}>
-            <AutoSearchWrap autoSearch={autoSearch}>
+            <AutoSearchWrap autosearch={autoSearch}>
               {keyItems.map((item) => (
                 <StackSearchList name={item} />
               ))}
@@ -147,7 +156,7 @@ const SearchWrap = styled.div`
 `;
 
 interface AutoSearchWrapProps {
-  autoSearch: boolean;
+  autosearch: boolean;
 }
 
 const bounceIn = keyframes`
@@ -178,7 +187,7 @@ const AutoSearchWrap = styled.div<AutoSearchWrapProps>`
   border-radius: 8px;
   background-color: ${theme.colors.white};
   box-shadow: 0px 3px 6px 2px rgba(176, 176, 176, 0.5);
-  animation: ${(props) => (props.autoSearch ? bounceIn : bounceOut)};
+  animation: ${(props) => (props.autosearch ? bounceIn : bounceOut)};
   animation-duration: 0.25s;
 
   overflow-y: scroll;
