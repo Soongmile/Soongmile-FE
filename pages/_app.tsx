@@ -5,6 +5,7 @@ import { NextPage } from 'next';
 import { ReactElement, ReactNode } from 'react';
 import { GlobalStyle } from '../styles/globalStyle';
 import Footer from '../components/reusable/Footer';
+import Header from '../components/reusable/Header';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -22,6 +23,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <GlobalStyle />
+        <Header />
         {getLayout(<Component {...pageProps} />)}
         <Footer />
       </RecoilRoot>

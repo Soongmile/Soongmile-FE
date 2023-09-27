@@ -6,7 +6,11 @@ import Tag from '../Tag';
 import Spacing from '../Spacing';
 import StackTagsWrap from './atoms/StackTagsWrap';
 
-const Card = () => {
+interface CardProps {
+  id: number;
+}
+
+const Card = ({ id }: CardProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const [scrollState, setScrollState] = useState<'left' | 'right'>('right');
@@ -106,7 +110,7 @@ const Card = () => {
       </StackTagsArea>
       <Spacing direction="vertical" size={16} />
       <InfoTextWrap>
-        <InfoText>{`${35}분전`}</InfoText>
+        <InfoText>{`${id}분전`}</InfoText>
         <InfoTwoTextWrap>
           <InfoText>{`조회수 ${100}`}</InfoText>
           <Spacing direction="horizontal" size={16} />
