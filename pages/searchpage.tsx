@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import theme from '@/styles/theme';
 import SideBar from '@/components/reusable/SideBar';
 import { MAINPAGE_MENU_LIST } from '@/const';
-import Card from '@/components/reusable/Card';
+// import Card from '@/components/reusable/Card';
 
 const SearchPage: NextPage = () => {
   return (

@@ -23,6 +23,7 @@
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
+    "import/order": 0,
     "import/resolver": {
       "typescript": {
         "alwaysTryTypes": true,
