@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { styled } from 'styled-components';
 import theme from '../../styles/theme';
-import { usePathname } from 'next/navigation';
 import Logo from '../../assets/Logo.svg';
 
 interface LinkProps {
@@ -23,10 +23,10 @@ const Header = () => {
           <NavLink active={pathname === '/questionWrite'} href="/questionWrite">
             질문
           </NavLink>
-          <NavLink active={pathname === '/'} href="/">
+          <NavLink active={pathname === ''} href="/">
             포인트
           </NavLink>
-          <NavLink active={pathname === '/'} href="/">
+          <NavLink active={pathname === ''} href="/">
             커피챗
           </NavLink>
         </Nav>

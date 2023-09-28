@@ -19,20 +19,7 @@ const SearchPage: NextPage = () => {
         <RightWrap>
           <Title>전체</Title>
           <Spacing direction="vertical" size={32} />
-          <CardWrap>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </CardWrap>
+          <CardWrap />
           <Spacing direction="vertical" size={24} />
           <PaginationWrap>
             <PaginationItem pageSelected>1</PaginationItem>
