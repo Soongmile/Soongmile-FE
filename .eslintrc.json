@@ -15,6 +15,10 @@
     "react": {
       "version": "detect"
     },
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": true, "optionalDependencies": false, "peerDependencies": false }
+    ],
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -24,6 +28,7 @@
         "alwaysTryTypes": true,
         "project": "./tsconfig.json"
       },
+      "import/order": "off",
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
@@ -37,7 +42,7 @@
     "project": ["tsconfig.json"],
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "prettier"],
+  "plugins": ["react", "react-hooks", "prettier", "import"],
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
@@ -50,6 +55,7 @@
     "react/react-in-jsx-scope": 0,
     "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
     "react/prefer-stateless-function": 0,
+    "react/prefer-default-export": "off",
     "react/jsx-filename-extension": 0,
     "react/jsx-one-expression-per-line": 0,
     "no-nested-ternary": 0,
@@ -64,6 +70,8 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "react/require-default-props": 0,
+    "no-restricted-syntax": 0
   }
 }
