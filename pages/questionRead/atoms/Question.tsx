@@ -1,7 +1,13 @@
 import Spacing from '@/components/reusable/Spacing';
 import Tag from '@/components/reusable/Tag';
 import theme from '@/styles/theme';
+import dynamic from 'next/dynamic';
+
 import styled from 'styled-components';
+
+const Viewer = dynamic(() => import('../../../components/reusable/MarkDown/MarkdownViewer'), {
+  ssr: false,
+});
 
 const Question = () => {
   return (
@@ -28,11 +34,12 @@ const Question = () => {
           </TitleWrap>
           <Spacing direction="vertical" size={32} />
           <QuestionContent>
-            경영학을 심도깊게 기초부터 배우고 싶은데요!
+            <Viewer />
+            {/* 경영학을 심도깊게 기초부터 배우고 싶은데요!
             <br />
             강의, 퀄리티, 내용, 교수진이 괜찮은 인강 사이트 & 공부 방법이 궁금합니다!
             <br />
-            공부하기 좋은 서적도 추천해주시면 감사하겠습니다
+            공부하기 좋은 서적도 추천해주시면 감사하겠습니다 */}
           </QuestionContent>
           <Spacing direction="vertical" size={32} />
           <InfoContainer>
