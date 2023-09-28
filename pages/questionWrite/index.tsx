@@ -6,6 +6,9 @@ import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import SquareBtn from '@/components/reusable/Buttons/SquareBtn';
 import MarkdownEditorSkeleton from '@/components/reusable/MarkDown/MarkdownEditorSkeleton';
+import useQuestionWrite from '@/hooks/useQuestionWrite';
+import { useEffect } from 'react';
+import usePostQuestionWrite from '@/hooks/usePostQuestionWrite';
 import QuestionTitle from './atoms/QuestionTitle';
 import FieldSelector from './atoms/FieldSelector';
 import StackSearch from './atoms/StackSearch';
@@ -18,6 +21,13 @@ const MarkdownEditor = dynamic(() => import('../../components/reusable/MarkDown/
 });
 
 const QuestionWrite: NextPage = () => {
+  const { writeForm, handleTitle, handleContent, handleField, handleTag } = useQuestionWrite();
+  const { mutate: postQuestion } = usePostQuestionWrite();
+
+  useEffect(() => {
+    console.log(writeForm);
+  }, [writeForm]);
+
   return (
     <Wrap>
       <Spacing size={68} direction="vertical" />
@@ -46,6 +56,10 @@ const QuestionWrite: NextPage = () => {
           placeholder="예시) 피그마 공부 방법을 알 수 있을까요?"
           width="640px"
           height="56px"
+          value={writeForm.title}
+          onChange={(e) => {
+            handleTitle(e.target.value);
+          }}
         />
       </section>
       <section>
@@ -56,12 +70,24 @@ const QuestionWrite: NextPage = () => {
         <Spacing size={10} direction="vertical" />
         <ContentTip>Tip) 내가 처한 상황을 적으면 더 도움되는 답변을 얻을 수 있어요.</ContentTip>
         <Spacing size={16} direction="vertical" />
-        <MarkdownEditor />
+        <MarkdownEditor onChange={handleContent} />
       </section>
-      <FieldSelector />
-      <StackSearch />
+      <FieldSelector onChange={handleField} />
+      <StackSearch onChange={handleTag} />
       <Spacing size={64} direction="vertical" />
-      <SquareBtn>업로드</SquareBtn>
+      <SquareBtn
+        able={
+          writeForm.title !== '' &&
+          writeForm.content !== '' &&
+          writeForm.field.length > 0 &&
+          writeForm.tag.length > 0
+        }
+        onClick={() => {
+          postQuestion(writeForm);
+        }}
+      >
+        업로드
+      </SquareBtn>
       <Spacing size={64} direction="vertical" />
     </Wrap>
   );
