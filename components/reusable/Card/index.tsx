@@ -6,7 +6,11 @@ import Tag from '../Tag';
 import Spacing from '../Spacing';
 import StackTagsWrap from './atoms/StackTagsWrap';
 
-const Card = () => {
+interface CardProps {
+  id: number;
+}
+
+const Card = ({ id }: CardProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const [scrollState, setScrollState] = useState<'left' | 'right'>('right');
@@ -55,7 +59,9 @@ const Card = () => {
 
   return (
     <StyledCard>
-      <Tag variant="color" content="직무" />
+      <Tag color="color" size="small">
+        <p>직무</p>
+      </Tag>
       <Spacing direction="vertical" size={16} />
       <Title>제목입니다제목입니다제목입니다제목입니다제목입니다제목입니다</Title>
       <Spacing direction="vertical" size={16} />
@@ -67,17 +73,29 @@ const Card = () => {
       <Spacing direction="vertical" size={16} />
       <StackTagsArea>
         <StackTagsWrap ref={ref}>
-          <Tag variant="gray" content="스택2222" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
           <Spacing direction="horizontal" size={8} />
-          <Tag variant="gray" content="스택" />
+          <Tag color="gray" size="big">
+            <p>스택2222</p>
+          </Tag>
         </StackTagsWrap>
         {useIsOverflow({ ref }) && scrollState === 'right' && (
           <OverflowBoxRight>
@@ -92,7 +110,7 @@ const Card = () => {
       </StackTagsArea>
       <Spacing direction="vertical" size={16} />
       <InfoTextWrap>
-        <InfoText>{`${35}분전`}</InfoText>
+        <InfoText>{`${id}분전`}</InfoText>
         <InfoTwoTextWrap>
           <InfoText>{`조회수 ${100}`}</InfoText>
           <Spacing direction="horizontal" size={16} />

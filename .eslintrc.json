@@ -23,11 +23,13 @@
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
+    "import/order": 0,
     "import/resolver": {
       "typescript": {
         "alwaysTryTypes": true,
         "project": "./tsconfig.json"
       },
+      "import/order": "off",
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
@@ -54,6 +56,7 @@
     "react/react-in-jsx-scope": 0,
     "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
     "react/prefer-stateless-function": 0,
+    "react/prefer-default-export": "off",
     "react/jsx-filename-extension": 0,
     "react/jsx-one-expression-per-line": 0,
     "no-nested-ternary": 0,

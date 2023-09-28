@@ -1,12 +1,12 @@
 import Spacing from '@/components/reusable/Spacing';
 import type { NextPage } from 'next';
 import styled from 'styled-components';
-import theme from '../styles/theme';
-import TextInput from '../components/reusable/TextInput';
-import CheckedBtn from '../components/reusable/Buttons/CheckedBtn';
 import { useState } from 'react';
-import SquareBtn from '../components/reusable/Buttons/SquareBtn';
 import Link from 'next/link';
+import theme from '../styles/theme';
+import TextInput from '../components/reusable/Inputs/TextInput';
+import CheckedBtn from '../components/reusable/Buttons/CheckedBtn';
+import SquareBtn from '../components/reusable/Buttons/SquareBtn';
 
 interface AgreeType {
   personalInfo: boolean;
