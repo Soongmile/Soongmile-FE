@@ -28,6 +28,8 @@ export interface GetQuestionResponse {
   field: FieldType[];
   tag: string[];
   memberId: number;
+  memberName: string;
+  postTime: string;
   hits: number;
   likes: number;
   answerList: AnswerType[];
