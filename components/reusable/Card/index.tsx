@@ -188,7 +188,7 @@ const OverflowBoxRight = styled.div`
   align-items: center;
   width: 68px;
   height: 24px;
-  background-image: url('gradientRight.svg');
+  background-image: url('img/gradientRight.svg');
 `;
 
 const OverflowBoxLeft = styled.div`
@@ -200,17 +200,17 @@ const OverflowBoxLeft = styled.div`
   align-items: center;
   width: 68px;
   height: 24px;
-  background-image: url('gradientLeft.svg');
+  background-image: url('img/gradientLeft.svg');
 `;
 
 const ButtonLeft = styled.div`
   height: 16px;
   width: 16px;
-  background-image: url('leftArrow.svg');
+  background-image: url('img/leftArrow.svg');
 `;
 
 const ButtonRight = styled.div`
   height: 16px;
   width: 16px;
-  background-image: url('rightArrow.svg');
+  background-image: url('img/rightArrow.svg');
 `;
