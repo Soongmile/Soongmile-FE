@@ -6,8 +6,23 @@ import theme from '@/styles/theme';
 import SideBar from '@/components/reusable/SideBar';
 import { MAINPAGE_MENU_LIST } from '@/const';
 import Card from '@/components/reusable/Card';
+import { useState } from 'react';
 
 const SearchPage: NextPage = () => {
+  const itemsPerPage = 12; // 한 페이지에 표시할 아이템 수
+  const totalItems = 20; // 전체 아이템 수 (예시로 12개로 설정)
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+
   return (
     <Container>
       <Spacing direction="vertical" size={64} />
@@ -19,15 +34,23 @@ const SearchPage: NextPage = () => {
         <RightWrap>
           <Title>전체</Title>
           <Spacing direction="vertical" size={32} />
-          <CardWrap />
+          <CardWrap>
+            {Array.from({ length: endIndex - startIndex }, (_, index) => (
+              <Card key={startIndex + index} id={startIndex + index + 1} />
+            ))}
+          </CardWrap>
           <Spacing direction="vertical" size={24} />
-          <PaginationWrap>
-            <PaginationItem pageSelected>1</PaginationItem>
-            <Spacing direction="horizontal" size={2} />
-            <PaginationItem pageSelected={false}>2</PaginationItem>
-            <Spacing direction="horizontal" size={2} />
-            <PaginationItem pageSelected={false}>3</PaginationItem>
-          </PaginationWrap>
+          <Pagination>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <PageBtn
+                key={index + 1}
+                onClick={() => handlePageChange(index + 1)}
+                className={currentPage === index + 1 ? 'active' : ''}
+              >
+                {index + 1}
+              </PageBtn>
+            ))}
+          </Pagination>
           <Spacing direction="vertical" size={73} />
         </RightWrap>
       </ContentWrap>
@@ -64,33 +87,31 @@ const Title = styled.p`
 const CardWrap = styled.div`
   width: 904px;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 32px 32px;
 `;
 
-interface PageProps {
-  pageSelected: boolean;
-}
-
-const PaginationWrap = styled.div`
-  height: 32px;
-  width: fit-content;
-  display: flex;
-  margin: 0 auto;
+const Pagination = styled.div`
+  align-items: center;
+  text-align: center;
+  margin-top: 24px;
 `;
 
-const PaginationItem = styled.span<PageProps>`
-  height: 32px;
-  width: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: ${(props) => props.pageSelected && `url('/img/paginationSelected.svg')`};
-  color: ${(props) => (props.pageSelected ? theme.colors.primary : theme.colors.gray2)};
+const PageBtn = styled.button`
+  margin-left: 10px;
+  border: none;
+  background-color: transparent;
+  color: ${theme.colors.gray2};
   font-size: ${theme.fontStyles.Text_S.fontSize}px;
   font-weight: ${theme.fontStyles.Text_S.fontWeight};
-  background-size: contain;
-  background-position: center;
-  cursor: pointer;
+
+  color: ${theme.colors.gray2};
+
+  &.active {
+    color: ${theme.colors.primary};
+    font-weight: bold;
+    border-radius: 100%;
+    border: 1px solid ${theme.colors.gray2};
+    padding: 6px 10px 6px 10px;
+  }
 `;
