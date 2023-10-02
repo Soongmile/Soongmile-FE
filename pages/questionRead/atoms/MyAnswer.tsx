@@ -1,8 +1,11 @@
 import SquareBtn from '@/components/reusable/Buttons/SquareBtn';
 import MarkdownEditorSkeleton from '@/components/reusable/MarkDown/MarkdownEditorSkeleton';
 import Spacing from '@/components/reusable/Spacing';
+import usePostAnswer from '@/hooks/usePostAnswer';
 import theme from '@/styles/theme';
+import { Editor } from '@toast-ui/react-editor';
 import dynamic from 'next/dynamic';
+import { RefObject, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const MarkdownEditor = dynamic(
@@ -15,7 +18,23 @@ const MarkdownEditor = dynamic(
   },
 );
 
-const MyAnswer = () => {
+interface MyAnswerProps {
+  pId: number;
+}
+
+const MyAnswer = ({ pId }: MyAnswerProps) => {
+  const [answerContent, setAnswerContent] = useState<string>('');
+
+  const handleContent = (editorRef: RefObject<Editor>) => {
+    const data = editorRef?.current?.getInstance().getMarkdown();
+    setAnswerContent(data as string);
+  };
+
+  const { mutate: postAnswer, isSuccess } = usePostAnswer(pId);
+
+  useEffect(() => {
+    setAnswerContent('');
+  }, [isSuccess]);
   return (
     <MyAnswerContainer>
       <MyAnswerWrap>
@@ -34,9 +53,16 @@ const MyAnswer = () => {
           </Guide>
         </section>
         <Spacing size={32} direction="vertical" />
-        <MarkdownEditor />
+        <MarkdownEditor onChange={handleContent} />
         <Spacing size={32} direction="vertical" />
-        <AlignedSquareBtn>답변 게시</AlignedSquareBtn>
+        <AlignedSquareBtn
+          able={answerContent !== ''}
+          onClick={() => {
+            postAnswer({ content: answerContent, fileIds: [], questionId: pId });
+          }}
+        >
+          답변 게시
+        </AlignedSquareBtn>
       </MyAnswerWrap>
     </MyAnswerContainer>
   );
