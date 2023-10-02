@@ -1,4 +1,4 @@
-import { FieldType, QuestionWriteRequest } from '@/types/questionWrite.type';
+import { FieldType, QuestionWriteRequest } from '@/types/question.type';
 import { RefObject, useState } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 

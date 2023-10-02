@@ -1,4 +1,4 @@
-import { PostQuestionWriteResponse, QuestionWriteRequest } from '@/types/questionWrite.type';
+import { PostQuestionWriteResponse, QuestionWriteRequest } from '@/types/question.type';
 import client from './client';
 
 const postQuestionWrite = async ({
@@ -20,7 +20,7 @@ const postQuestionWrite = async ({
     {
       headers: {
         Authorization:
-          'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha211QGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE2OTU2MjY5NzAsImV4cCI6MTY5NTcxMzM3MH0.Qp-tus5vuO7r1wTsIQJAp_T80zQePo96y_LLH7w89OU',
+          'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha211QGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjk1OTgyNTI1LCJleHAiOjE2OTYwNjg5MjV9.N5UWZD4xvULjHk7EaKblTM7kJwEdZrQ3cfII1jZMuAE',
       },
     },
   );
