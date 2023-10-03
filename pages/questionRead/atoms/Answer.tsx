@@ -1,17 +1,23 @@
 import theme from '@/styles/theme';
 import styled from 'styled-components';
 import Spacing from '@/components/reusable/Spacing';
+import { AnswerType } from '@/types/question.type';
 import AnswerBox from './AnswerBox';
 
-const Answer = () => {
-  const AnswerBoxes = ['경영 마스터', '박숭실'];
-
+const Answer = ({ answers }: { answers?: AnswerType[] }) => {
   return (
     <AnswerContainer>
-      {AnswerBoxes.map((item, idx) => (
+      {answers?.map((item, idx) => (
         <>
-          <AnswerBox userName={item} />
-          {idx < AnswerBoxes.length - 1 && <Spacing size={48} direction="vertical" />}
+          {/* userName 수정 예정 */}
+          <AnswerBox
+            key={item.id}
+            userName="userName"
+            content={item.content}
+            postTime={item.postTime}
+            likes={item.likes}
+          />
+          {idx < answers.length - 1 && <Spacing size={48} direction="vertical" />}
         </>
       ))}
     </AnswerContainer>
