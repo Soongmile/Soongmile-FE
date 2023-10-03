@@ -10,7 +10,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const SquareBtn = ({ onClick, able = true, children, ...props }: ButtonProps) => {
   return (
-    <ButtonWrapper onClick={onClick} able={able} {...props}>
+    <ButtonWrapper disabled={!able} onClick={onClick} able={able} {...props}>
       {children}
     </ButtonWrapper>
   );
