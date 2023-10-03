@@ -1,21 +1,17 @@
-import { PostQuestionWriteResponse, QuestionWriteRequest } from '@/types/question.type';
+import { AnswerWriteRequest, PostAnswerWriteResponse } from '@/types/answer.type';
 import client from './client';
 
-const postQuestionWrite = async ({
-  title,
-  content,
+const postAnswer = async ({
+  questionId,
   fileIds,
-  field,
-  tag,
-}: QuestionWriteRequest): Promise<PostQuestionWriteResponse> => {
+  content,
+}: AnswerWriteRequest): Promise<PostAnswerWriteResponse> => {
   const response = await client.post(
-    '/user/question',
+    '/user/answer',
     {
-      title,
-      content,
+      questionId,
       fileIds,
-      field,
-      tag,
+      content,
     },
     {
       headers: {
@@ -27,4 +23,4 @@ const postQuestionWrite = async ({
   return response.data;
 };
 
-export default postQuestionWrite;
+export default postAnswer;

@@ -1,57 +1,70 @@
 import Spacing from '@/components/reusable/Spacing';
 import Tag from '@/components/reusable/Tag';
 import theme from '@/styles/theme';
+import { GetQuestionResponse } from '@/types/question.type';
+import fieldConverter from '@/utils/fieldConverter';
+import dateConvertor from '@/utils/dateConverter';
 import dynamic from 'next/dynamic';
-
 import styled from 'styled-components';
 
 const Viewer = dynamic(() => import('../../../components/reusable/MarkDown/MarkdownViewer'), {
   ssr: false,
 });
 
-const Question = () => {
+interface QuestionProps {
+  data?: GetQuestionResponse;
+}
+
+const Question = ({ data }: QuestionProps) => {
   return (
     <StyledQuestion>
-      <ContentWrap>
-        <TagWrap>
-          <Tag color="color" size="small">
-            <p>학교 생활</p>
-          </Tag>
-          <Spacing direction="horizontal" size={16} />
-          <Tag color="gray" size="small">
-            <p>공부법</p>
-          </Tag>
-          <Spacing direction="horizontal" size={16} />
-          <Tag color="gray" size="small">
-            <p>경영학</p>
-          </Tag>
-        </TagWrap>
-        <Spacing direction="vertical" size={8} />
-        <QuestionContentWrap>
-          <TitleWrap>
-            <Title>{`Q. ${'경영학 인강이나 공부 방법'}`}</Title>
-            <Declaration>신고</Declaration>
-          </TitleWrap>
-          <Spacing direction="vertical" size={32} />
-          <QuestionContent>
-            <Viewer />
-            {/* 경영학을 심도깊게 기초부터 배우고 싶은데요!
-            <br />
-            강의, 퀄리티, 내용, 교수진이 괜찮은 인강 사이트 & 공부 방법이 궁금합니다!
-            <br />
-            공부하기 좋은 서적도 추천해주시면 감사하겠습니다 */}
-          </QuestionContent>
-          <Spacing direction="vertical" size={32} />
-          <InfoContainer>
-            <Info>슝슝이</Info>
-            <InfoWrap>
-              <Info>4시간 전</Info>
-              <Spacing direction="horizontal" size={16} />
-              <Info>{`조회수 ${100}`}</Info>
-            </InfoWrap>
-          </InfoContainer>
-        </QuestionContentWrap>
-      </ContentWrap>
+      {data ? (
+        <ContentWrap>
+          <TagWrap>
+            {data.field?.map((item) => (
+              <>
+                <Tag color="color" size="small">
+                  <p>{fieldConverter(item)}</p>
+                </Tag>
+                <Spacing direction="horizontal" size={16} />
+              </>
+            ))}
+            {data.tag?.map((item, index) =>
+              index < data.tag.length - 1 ? (
+                <>
+                  <Tag color="gray" size="small">
+                    <p>{item}</p>
+                  </Tag>
+                  <Spacing direction="horizontal" size={16} />
+                </>
+              ) : (
+                <Tag color="gray" size="small">
+                  <p>{item}</p>
+                </Tag>
+              ),
+            )}
+          </TagWrap>
+          <Spacing direction="vertical" size={8} />
+          <QuestionContentWrap>
+            <TitleWrap>
+              <Title>{`Q. ${data.title}`}</Title>
+              <Declaration>신고</Declaration>
+            </TitleWrap>
+            <Spacing direction="vertical" size={32} />
+            <QuestionContent>{data.content && <Viewer content={data.content} />}</QuestionContent>
+            <Spacing direction="vertical" size={32} />
+            <InfoContainer>
+              <Info>{data.memberName}</Info>
+              <InfoWrap>
+                {/* 수정 필요 */}
+                <Info>{dateConvertor(data.postTime)}</Info>
+                <Spacing direction="horizontal" size={16} />
+                <Info>{`조회수 ${data.hits}`}</Info>
+              </InfoWrap>
+            </InfoContainer>
+          </QuestionContentWrap>
+        </ContentWrap>
+      ) : null}
     </StyledQuestion>
   );
 };
