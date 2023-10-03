@@ -1,15 +1,15 @@
 import type { NextPage } from 'next';
 import { styled } from 'styled-components';
+import Link from 'next/link';
+// import { useState } from 'react';
+import TextInput from '@/components/reusable/Inputs/TextInput';
 import Spacing from '../components/reusable/Spacing';
 import theme from '../styles/theme';
-import TextInput from '../components/reusable/TextInput';
 import SquareBtn from '../components/reusable/Buttons/SquareBtn';
-import Link from 'next/link';
-import { useState } from 'react';
 
 const Signin: NextPage = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  // const [email, setEmail] = useState<string>('');
+  // const [password, setPassword] = useState<string>('');
 
   return (
     <Container>
@@ -27,13 +27,14 @@ const Signin: NextPage = () => {
       <TextInput type="password" width="640px" height="56px" />
       <Spacing direction="vertical" size={64} />
       <BtnContainer>
-        <SquareBtn children="로그인" />
+        <SquareBtn>로그인</SquareBtn>
         <FindFlex>
           <Link href="/find">비밀번호 찾기</Link>
           <span>|</span>
           <Link href="/signup">회원가입</Link>
         </FindFlex>
       </BtnContainer>
+      <Spacing direction="vertical" size={271} />
     </Container>
   );
 };
