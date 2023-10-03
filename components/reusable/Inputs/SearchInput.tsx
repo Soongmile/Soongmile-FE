@@ -26,7 +26,7 @@ const SearchInput = forwardRef(
           placeholder={placeholder}
           width={width}
           height={height}
-          border={border}
+          border={border.toString()}
           {...props}
         />
         <SearchImg />
@@ -37,12 +37,12 @@ const SearchInput = forwardRef(
 
 export default SearchInput;
 
-const InputBox = styled.input<{ width: string; height: string; border: boolean }>`
+const InputBox = styled.input<{ width: string; height: string; border: string }>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   padding-left: 24px;
   border-radius: 16px;
-  border: ${({ border }) => (border ? `1px solid ${theme.colors.gray2}` : 'none')};
+  border: ${({ border }) => (border === 'true' ? `1px solid ${theme.colors.gray2}` : 'none')};
   font-weight: ${theme.fontStyles.Text_M.fontWeight};
   font-size: ${theme.fontStyles.Text_M.fontSize}px;
 

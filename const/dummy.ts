@@ -14,7 +14,7 @@ const StackDummy: StackDummyType = {
     'ReactNative',
     'Unity',
   ],
-  FE: [
+  FRONTEND: [
     'React',
     'Recoil',
     'React-Query',
@@ -25,7 +25,7 @@ const StackDummy: StackDummyType = {
     'Vue',
     'Svelte',
   ],
-  BE: [
+  BACKEND: [
     'Java',
     'Spring',
     'Nodejs',
@@ -38,7 +38,7 @@ const StackDummy: StackDummyType = {
     'Firebase',
   ],
   DESIGN: ['Figma', 'AdobeXD'],
-  PM: ['Figma', 'AdobeXD', 'Zeplin'],
+  PRODUCT_MANAGER: ['Figma', 'AdobeXD', 'Zeplin'],
   SCHOOL: [],
 };
 

@@ -46,4 +46,5 @@ const Ximg = styled.div`
   width: 18px;
   height: 18px;
   background-image: url('img/X.svg');
+  cursor: pointer;
 `;
