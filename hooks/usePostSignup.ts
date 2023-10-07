@@ -7,7 +7,7 @@ const usePostSignup = () => {
   const router = useRouter();
   return useMutation(postSignUp, {
     onSuccess: () => {
-      router.push('/');
+      router.push('/signin');
     },
     onError: (error) => {
       const Error = error as AxiosError;
