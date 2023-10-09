@@ -3,13 +3,15 @@ import { styled } from 'styled-components';
 import Link from 'next/link';
 // import { useState } from 'react';
 import TextInput from '@/components/reusable/Inputs/TextInput';
+import useSignin from '@/hooks/useSignin';
+import usePostSignin from '@/hooks/usePostSignin';
 import Spacing from '../components/reusable/Spacing';
 import theme from '../styles/theme';
 import SquareBtn from '../components/reusable/Buttons/SquareBtn';
 
 const Signin: NextPage = () => {
-  // const [email, setEmail] = useState<string>('');
-  // const [password, setPassword] = useState<string>('');
+  const { onChangeEmail, onChangePassword, email, password } = useSignin();
+  const { mutate: signin } = usePostSignin();
 
   return (
     <Container>
@@ -20,14 +22,26 @@ const Signin: NextPage = () => {
       <Spacing direction="vertical" size={56} />
       <SubText>이메일</SubText>
       <Spacing direction="vertical" size={16} />
-      <TextInput type="email" width="640px" height="56px" />
+      <TextInput type="email" width="640px" height="56px" value={email} onChange={onChangeEmail} />
       <Spacing direction="vertical" size={32} />
       <SubText>비밀번호</SubText>
       <Spacing direction="vertical" size={16} />
-      <TextInput type="password" width="640px" height="56px" />
+      <TextInput
+        type="password"
+        width="640px"
+        height="56px"
+        value={password}
+        onChange={onChangePassword}
+      />
       <Spacing direction="vertical" size={64} />
       <BtnContainer>
-        <SquareBtn>로그인</SquareBtn>
+        <SquareBtn
+          onClick={() => {
+            signin({ email, password });
+          }}
+        >
+          로그인
+        </SquareBtn>
         <FindFlex>
           <Link href="/find">비밀번호 찾기</Link>
           <span>|</span>
