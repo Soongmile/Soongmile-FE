@@ -4,12 +4,20 @@ import Spacing from '@/components/reusable/Spacing';
 import ToggleBtn from '@/components/reusable/Buttons/ToggleBtn';
 import { useRecoilState } from 'recoil';
 import fieldListState from '@/states/fieldListState';
+import { useState } from 'react';
+import { FieldType } from '@/types/question.type';
 import QuestionTitle from './QuestionTitle';
 
-const FieldSelector = () => {
-  const [fieldList, setFieldList] = useRecoilState(fieldListState);
+interface FieldSelectorProps {
+  onChange: (value: FieldType[]) => void;
+}
 
-  const toggleBtnOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+const FieldSelector = ({ onChange }: FieldSelectorProps) => {
+  const [fieldList, setFieldList] = useRecoilState(fieldListState);
+  const [selectedField, setSelectedField] = useState<FieldType[]>([]);
+
+  // 클릭된 버튼을 관리합니다 (UI)
+  const toggleBtnOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const newFieldList = { ...fieldList };
     const count = Object.values(fieldList).filter((element) => element === false).length;
 
@@ -17,14 +25,33 @@ const FieldSelector = () => {
       if (newField === e.currentTarget.value) {
         if (!newFieldList[newField]) {
           newFieldList[newField] = true;
+
           setFieldList(newFieldList);
         } else if (count < 3) {
           newFieldList[newField] = false;
+
           setFieldList(newFieldList);
         } else if (count >= 3) {
           alert('최대 3개까지 선택할 수 있습니다.');
         }
       }
+    }
+  };
+
+  // 선택된 데이터를 관리합니다 (request시 사용될 데이터)
+  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    toggleBtnOnClick(e);
+
+    if (!selectedField.includes(e.currentTarget.value as FieldType)) {
+      const newSelectedField = [...selectedField, e.currentTarget.value as FieldType];
+      setSelectedField(newSelectedField);
+      onChange(newSelectedField);
+    } else {
+      const newSelectedField = [...selectedField].filter(
+        (item) => item !== (e.currentTarget.value as FieldType),
+      );
+      setSelectedField(newSelectedField);
+      onChange(newSelectedField);
     }
   };
 
@@ -39,10 +66,11 @@ const FieldSelector = () => {
       <Spacing size={16} direction="vertical" />
       <ToggleBtnWrap>
         <ToggleBtn
-          value="PM"
-          able={fieldList.PM}
+          value="PRODUCT_MANAGER"
+          able={fieldList.PRODUCT_MANAGER}
           onClick={(e) => {
             toggleBtnOnClick(e);
+            handleOnClick(e);
           }}
         >
           기획/PM
@@ -53,6 +81,7 @@ const FieldSelector = () => {
           able={fieldList.DESIGN}
           onClick={(e) => {
             toggleBtnOnClick(e);
+            handleOnClick(e);
           }}
         >
           디자인
@@ -63,26 +92,29 @@ const FieldSelector = () => {
           able={fieldList.MOBILE}
           onClick={(e) => {
             toggleBtnOnClick(e);
+            handleOnClick(e);
           }}
         >
           모바일
         </ToggleBtn>
         <Spacing size={16} direction="horizontal" />
         <ToggleBtn
-          value="FE"
-          able={fieldList.FE}
+          value="FRONTEND"
+          able={fieldList.FRONTEND}
           onClick={(e) => {
             toggleBtnOnClick(e);
+            handleOnClick(e);
           }}
         >
           프론트엔드
         </ToggleBtn>
         <Spacing size={16} direction="horizontal" />
         <ToggleBtn
-          value="BE"
-          able={fieldList.BE}
+          value="BACKEND"
+          able={fieldList.BACKEND}
           onClick={(e) => {
             toggleBtnOnClick(e);
+            handleOnClick(e);
           }}
         >
           백엔드
@@ -93,6 +125,7 @@ const FieldSelector = () => {
           able={fieldList.SCHOOL}
           onClick={(e) => {
             toggleBtnOnClick(e);
+            handleOnClick(e);
           }}
         >
           학교 생활
