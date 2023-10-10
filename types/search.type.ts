@@ -17,7 +17,7 @@ interface SearchResult {
   title: string;
   content: string;
   tag: string[];
-  fields: FieldType;
+  fields: FieldType[];
   postTime: string;
   hits: number;
   answerCount: number;
