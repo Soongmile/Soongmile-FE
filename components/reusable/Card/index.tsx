@@ -3,6 +3,8 @@ import theme from '@/styles/theme';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import useIsOverflow from '@/hooks/useIsOverflow';
 import { useRouter } from 'next/router';
+import { FieldType } from '@/types/question.type';
+import dateConvertor from '@/utils/dateConverter';
 import Tag from '../Tag';
 import Spacing from '../Spacing';
 import StackTagsWrap from './atoms/StackTagsWrap';
@@ -12,7 +14,7 @@ interface CardProps {
   title: string;
   content: string;
   tags: string[];
-  fields: string[];
+  fields: FieldType[] | string[];
   postTime: string | null;
   hits: number;
   answerCount: number;
@@ -119,7 +121,7 @@ const Card = ({ id, title, content, tags, fields, postTime, hits, answerCount }:
       </StackTagsArea>
       <Spacing direction="vertical" size={16} />
       <InfoTextWrap>
-        <InfoText>{postTime}</InfoText>
+        <InfoText>{dateConvertor(postTime)}</InfoText>
         <InfoTwoTextWrap>
           <InfoText>{`조회수 ${hits}`}</InfoText>
           <Spacing direction="horizontal" size={16} />
