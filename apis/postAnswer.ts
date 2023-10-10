@@ -1,4 +1,5 @@
 import { AnswerWriteRequest, PostAnswerWriteResponse } from '@/types/answer.type';
+import { getCookie } from 'cookies-next';
 import client from './client';
 
 const postAnswer = async ({
@@ -6,6 +7,8 @@ const postAnswer = async ({
   fileIds,
   content,
 }: AnswerWriteRequest): Promise<PostAnswerWriteResponse> => {
+  const token = getCookie('token');
+
   const response = await client.post(
     '/user/answer',
     {
@@ -15,8 +18,7 @@ const postAnswer = async ({
     },
     {
       headers: {
-        Authorization:
-          'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha211QGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjk1OTgyNTI1LCJleHAiOjE2OTYwNjg5MjV9.N5UWZD4xvULjHk7EaKblTM7kJwEdZrQ3cfII1jZMuAE',
+        Authorization: token,
       },
     },
   );
