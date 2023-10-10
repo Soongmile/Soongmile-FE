@@ -1,18 +1,16 @@
 import postSignin from '@/apis/postSignin';
-import authState from '@/states/authState';
 import { AxiosError } from 'axios';
+import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
-import { useRecoilState } from 'recoil';
 
 const usePostSignin = () => {
   const router = useRouter();
-  const [auth, useAuth] = useRecoilState(authState);
   return useMutation(postSignin, {
-    onSuccess: (response) => {
+    onSuccess: (data) => {
+      setCookie('token', data.result);
       router.push(`/`);
-      console.log(response);
-      useAuth({ ...auth, token: response.result });
+      console.log(data);
     },
     onError: (error) => {
       const Error = error as AxiosError;
