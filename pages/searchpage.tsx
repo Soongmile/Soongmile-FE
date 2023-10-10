@@ -53,7 +53,19 @@ const SearchPage: NextPage = () => {
             {data && data?.result.length > 0 ? (
               data.result
                 .slice(startIndex, Math.min(startIndex + itemsPerPage, data.result.length))
-                .map((items) => <Card id={items.id} key={items.id} />)
+                .map((items) => (
+                  <Card
+                    id={items.id}
+                    title={items.title}
+                    content={items.content}
+                    tags={items.tag}
+                    fields={items.fields}
+                    hits={items.hits}
+                    answerCount={items.answerCount}
+                    postTime={items.postTime}
+                    key={items.id}
+                  />
+                ))
             ) : (
               <div>검색 결과가 없습니다.</div>
             )}
