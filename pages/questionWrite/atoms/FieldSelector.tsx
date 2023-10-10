@@ -5,7 +5,7 @@ import ToggleBtn from '@/components/reusable/Buttons/ToggleBtn';
 import { useRecoilState } from 'recoil';
 import fieldListState from '@/states/fieldListState';
 import { useState } from 'react';
-import { FieldType } from '@/types/questionWrite.type';
+import { FieldType } from '@/types/question.type';
 import QuestionTitle from './QuestionTitle';
 
 interface FieldSelectorProps {

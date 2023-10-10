@@ -1,24 +1,27 @@
 import theme from '@/styles/theme';
-// import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Spacing from '@/components/reusable/Spacing';
+import { useRouter } from 'next/router';
+import useGetQuestionRead from '@/hooks/useGetQuestionRead';
 import Search from '../../components/reusable/Search';
 import Question from './atoms/Question';
 import Answer from './atoms/Answer';
 import MyAnswer from './atoms/MyAnswer';
 
 const QuestionRead = () => {
-  // const router = useRouter();
-  // const { pid } = router.query;
+  const router = useRouter();
+  const { pid } = router.query;
+
+  const { data } = useGetQuestionRead(Number(pid) as number);
 
   return (
     <Container>
       <Spacing direction="vertical" size={64} />
       <Search />
       <Spacing direction="vertical" size={64} />
-      <Question />
-      <Answer />
-      <MyAnswer />
+      <Question data={data} />
+      <Answer answers={data?.answerList} />
+      <MyAnswer pId={Number(pid) as number} />
     </Container>
   );
 };

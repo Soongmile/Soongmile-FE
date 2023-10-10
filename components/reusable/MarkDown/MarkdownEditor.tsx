@@ -21,7 +21,7 @@ const MarkdownEditor = ({ onChange }: MarkdownEditorProps) => {
     <Editor
       ref={editorRef}
       onChange={() => onChange(editorRef)}
-      // initialValue="hello react editor world!"
+      initialValue=""
       previewStyle="tab"
       height="600px"
       initialEditType="markdown"
