@@ -6,12 +6,12 @@ import { useMutation } from 'react-query';
 const usePostSignup = () => {
   const router = useRouter();
   return useMutation(postSignUp, {
-    onSuccess: () => {
+    onSuccess: (response) => {
       router.push('/signin');
+      console.log(response);
     },
     onError: (error) => {
       const Error = error as AxiosError;
-
       console.log(Error);
     },
   });
