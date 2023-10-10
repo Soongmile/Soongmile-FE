@@ -30,7 +30,7 @@ const SearchPage: NextPage = () => {
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // 한 페이지에 표시할 아이템 수
+  const itemsPerPage = 12; // 한 페이지에 표시할 아이템 수
 
   const startIndex = (currentPage - 1) * itemsPerPage;
 
