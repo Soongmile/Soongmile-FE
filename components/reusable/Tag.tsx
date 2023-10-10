@@ -1,11 +1,11 @@
 import theme from '@/styles/theme';
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   color: 'color' | 'gray';
   size: 'small' | 'big';
-  children: ReactElement;
+  children: ReactNode;
 }
 
 const Tag = ({ color = 'color', size = 'small', children, ...props }: Props) => {
