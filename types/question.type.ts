@@ -19,6 +19,7 @@ export interface AnswerType {
   content: string;
   postTime: string;
   memberId: number;
+  memberName: string;
   likes: number;
 }
 
