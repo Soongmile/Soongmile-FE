@@ -2,16 +2,25 @@ import styled from 'styled-components';
 import theme from '@/styles/theme';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import useIsOverflow from '@/hooks/useIsOverflow';
+import { useRouter } from 'next/router';
 import Tag from '../Tag';
 import Spacing from '../Spacing';
 import StackTagsWrap from './atoms/StackTagsWrap';
 
 interface CardProps {
   id: number;
+  title: string;
+  content: string;
+  tags: string[];
+  fields: string[];
+  postTime: string | null;
+  hits: number;
+  answerCount: number;
 }
 
-const Card = ({ id }: CardProps) => {
+const Card = ({ id, title, content, tags, fields, postTime, hits, answerCount }: CardProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   const [scrollState, setScrollState] = useState<'left' | 'right'>('right');
 
@@ -57,45 +66,45 @@ const Card = ({ id }: CardProps) => {
     };
   }, []);
 
+  const handleGoRead = () => {
+    router.push(`/questionRead/${id}`);
+  };
+
   return (
-    <StyledCard>
-      <Tag color="color" size="small">
-        <p>직무</p>
-      </Tag>
+    <StyledCard
+      onClick={() => {
+        handleGoRead();
+      }}
+    >
+      <StackTagsArea>
+        <StackTagsWrap ref={ref}>
+          {fields &&
+            fields.map((field) => (
+              <>
+                <Tag color="color" size="small">
+                  <p key={field}>{field}</p>
+                </Tag>
+                <Spacing direction="horizontal" size={8} />
+              </>
+            ))}
+        </StackTagsWrap>
+      </StackTagsArea>
       <Spacing direction="vertical" size={16} />
-      <Title>제목입니다제목입니다제목입니다제목입니다제목입니다제목입니다</Title>
+      <Title>{title}</Title>
       <Spacing direction="vertical" size={16} />
-      <ContentText>
-        내용 미리보기 최대 3줄 (약 40자) 내용 미리보기 최대 3줄 (약 40자) 내용 미리보기 최대 3줄 (약
-        40자) 내용 미리보기 내용 미리보기 최대 3줄 (약 40자) 내용 미리보기 최대 3줄 (약 40자) 내용
-        미리보기 최대 3줄 (약 40자) 내용 미리보기
-      </ContentText>
+      <ContentText>{content}</ContentText>
       <Spacing direction="vertical" size={16} />
       <StackTagsArea>
         <StackTagsWrap ref={ref}>
-          <Tag color="gray" size="big">
-            <p>스택2222</p>
-          </Tag>
-          <Spacing direction="horizontal" size={8} />
-          <Tag color="gray" size="big">
-            <p>스택2222</p>
-          </Tag>
-          <Spacing direction="horizontal" size={8} />
-          <Tag color="gray" size="big">
-            <p>스택2222</p>
-          </Tag>
-          <Spacing direction="horizontal" size={8} />
-          <Tag color="gray" size="big">
-            <p>스택2222</p>
-          </Tag>
-          <Spacing direction="horizontal" size={8} />
-          <Tag color="gray" size="big">
-            <p>스택2222</p>
-          </Tag>
-          <Spacing direction="horizontal" size={8} />
-          <Tag color="gray" size="big">
-            <p>스택2222</p>
-          </Tag>
+          {tags &&
+            tags.map((tag) => (
+              <>
+                <Tag color="gray" size="big">
+                  <p>{tag}</p>
+                </Tag>
+                <Spacing direction="horizontal" size={8} />
+              </>
+            ))}
         </StackTagsWrap>
         {useIsOverflow({ ref }) && scrollState === 'right' && (
           <OverflowBoxRight>
@@ -110,11 +119,11 @@ const Card = ({ id }: CardProps) => {
       </StackTagsArea>
       <Spacing direction="vertical" size={16} />
       <InfoTextWrap>
-        <InfoText>{`${id}분전`}</InfoText>
+        <InfoText>{postTime}</InfoText>
         <InfoTwoTextWrap>
-          <InfoText>{`조회수 ${100}`}</InfoText>
+          <InfoText>{`조회수 ${hits}`}</InfoText>
           <Spacing direction="horizontal" size={16} />
-          <InfoText>{`답변 ${3}`}</InfoText>
+          <InfoText>{`답변 ${answerCount}`}</InfoText>
         </InfoTwoTextWrap>
       </InfoTextWrap>
     </StyledCard>
@@ -133,6 +142,7 @@ const StyledCard = styled.div`
   border: 1px solid var(--gray-1, #f2f4f6);
   background: var(--white, #fff);
   padding: 21px 32px 20px 32px;
+  cursor: pointer;
 `;
 
 const ContentText = styled.div`
@@ -143,6 +153,7 @@ const ContentText = styled.div`
   font-size: ${theme.fontStyles.Text_S.fontSize}px;
   height: 51px;
   color: ${theme.colors.gray3};
+  word-break: break-all;
 `;
 
 const Title = styled.div`

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import searchFilterState from '@/states/searchFilterState';
+import { useRouter } from 'next/router';
 import SearchFilterDropdown from './SearchFilterDropdown';
 
 interface SearchProps {
@@ -18,6 +19,7 @@ const Search = ({ variant = 'down' }: SearchProps) => {
 
   const ref = useRef<HTMLButtonElement>(null);
   const dropRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const handleAutoSearch = (
     searchRef: MutableRefObject<HTMLButtonElement | null>,
@@ -71,7 +73,13 @@ const Search = ({ variant = 'down' }: SearchProps) => {
       <Spacing direction="horizontal" size={24} />
       <SearchInput placeholder="궁금한 내용을 검색해보세요" border={false} width="733px" />
       <Spacing direction="horizontal" size={48} />
-      <QuestionBtn>질문하기</QuestionBtn>
+      <QuestionBtn
+        onClick={() => {
+          router.push('/questionWrite');
+        }}
+      >
+        질문하기
+      </QuestionBtn>
     </SearchContainer>
   );
 };
