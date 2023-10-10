@@ -4,7 +4,6 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import useIsOverflow from '@/hooks/useIsOverflow';
 import { useRouter } from 'next/router';
 import { FieldType } from '@/types/question.type';
-import dateConvertor from '@/utils/dateConverter';
 import Tag from '../Tag';
 import Spacing from '../Spacing';
 import StackTagsWrap from './atoms/StackTagsWrap';
@@ -121,7 +120,7 @@ const Card = ({ id, title, content, tags, fields, postTime, hits, answerCount }:
       </StackTagsArea>
       <Spacing direction="vertical" size={16} />
       <InfoTextWrap>
-        <InfoText>{dateConvertor(postTime)}</InfoText>
+        <InfoText>{postTime}</InfoText>
         <InfoTwoTextWrap>
           <InfoText>{`조회수 ${hits}`}</InfoText>
           <Spacing direction="horizontal" size={16} />
@@ -201,7 +200,7 @@ const OverflowBoxRight = styled.div`
   align-items: center;
   width: 68px;
   height: 24px;
-  background-image: url('gradientRight.svg');
+  background-image: url('img/gradientRight.svg');
 `;
 
 const OverflowBoxLeft = styled.div`
@@ -213,17 +212,17 @@ const OverflowBoxLeft = styled.div`
   align-items: center;
   width: 68px;
   height: 24px;
-  background-image: url('gradientLeft.svg');
+  background-image: url('/img/gradientLeft.svg');
 `;
 
 const ButtonLeft = styled.div`
   height: 16px;
   width: 16px;
-  background-image: url('leftArrow.svg');
+  background-image: url('/img/leftArrow.svg');
 `;
 
 const ButtonRight = styled.div`
   height: 16px;
   width: 16px;
-  background-image: url('rightArrow.svg');
+  background-image: url('/img/rightArrow.svg');
 `;
