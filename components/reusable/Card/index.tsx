@@ -108,22 +108,12 @@ const Card = ({ id, title, content, tags, fields, postTime, hits, answerCount }:
         </StackTagsWrap>
         {useIsOverflow({ ref }) && scrollState === 'right' && (
           <OverflowBoxRight>
-            <ButtonRight
-              onClick={(e) => {
-                e.stopPropagation();
-                moveRight(ref);
-              }}
-            />
+            <ButtonRight onClick={() => moveRight(ref)} />
           </OverflowBoxRight>
         )}
         {useIsOverflow({ ref }) && scrollState === 'left' && (
           <OverflowBoxLeft>
-            <ButtonLeft
-              onClick={(e) => {
-                e.stopPropagation();
-                moveLeft(ref);
-              }}
-            />
+            <ButtonLeft onClick={() => moveLeft(ref)} />
           </OverflowBoxLeft>
         )}
       </StackTagsArea>
