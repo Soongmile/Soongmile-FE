@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
+import { Dispatch, ForwardedRef, InputHTMLAttributes, SetStateAction, forwardRef } from 'react';
+import { useRouter } from 'next/router';
 import theme from '../../../styles/theme';
 
 interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,6 +8,8 @@ interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: string;
   height?: string;
   border?: boolean;
+  forwardvalue: string;
+  forwardsetvalue: Dispatch<SetStateAction<string>>;
 }
 
 const SearchInput = forwardRef(
@@ -16,10 +19,14 @@ const SearchInput = forwardRef(
       width = '640px',
       height = '56px',
       border = true,
+      forwardvalue,
+      forwardsetvalue,
       ...props
     }: SearchInputProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
+    const router = useRouter();
+
     return (
       <SearchInputWrap width={width} height={height} ref={ref}>
         <InputBox
@@ -27,6 +34,15 @@ const SearchInput = forwardRef(
           width={width}
           height={height}
           border={border.toString()}
+          value={forwardvalue}
+          onChange={(e) => {
+            forwardsetvalue(e.target.value);
+          }}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') {
+              router.push(`/searchpage?search=${forwardvalue}`);
+            }
+          }}
           {...props}
         />
         <SearchImg />
