@@ -12,7 +12,7 @@ const Answer = ({ answers }: { answers?: AnswerType[] }) => {
           {/* userName 수정 예정 */}
           <AnswerBox
             key={item.id}
-            userName="userName"
+            userName={item.memberName}
             content={item.content}
             postTime={item.postTime}
             likes={item.likes}
