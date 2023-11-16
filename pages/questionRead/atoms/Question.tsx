@@ -2,7 +2,7 @@ import Spacing from '@/components/reusable/Spacing';
 import Tag from '@/components/reusable/Tag';
 import theme from '@/styles/theme';
 import { GetQuestionResponse } from '@/types/question.type';
-import fieldConverter from '@/utils/fieldConverter';
+import fieldConverter from '@/utils/fieldToStringConverter';
 import dateConvertor from '@/utils/dateConverter';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
@@ -54,11 +54,11 @@ const Question = ({ data }: QuestionProps) => {
             <QuestionContent>{data.content && <Viewer content={data.content} />}</QuestionContent>
             <Spacing direction="vertical" size={32} />
             <InfoContainer>
-              <LikeWrap>
+              {/* <LikeWrap>
                 <Like liked />
                 <Spacing direction="horizontal" size={10} />
                 <LikeCount>{data.likes}</LikeCount>
-              </LikeWrap>
+              </LikeWrap> */}
               <InfoWrap>
                 <Info>{data.memberName}</Info>
                 <Spacing direction="horizontal" size={16} />

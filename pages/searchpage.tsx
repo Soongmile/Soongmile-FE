@@ -11,11 +11,14 @@ import searchFilterState from '@/states/searchFilterState';
 import { useSearchParams } from 'next/navigation';
 import usePostSearch from '@/hooks/usePostSearch';
 import Card from '@/components/reusable/Card';
-// import Card from '@/components/reusable/Card';
+import currentState from '@/states/CurrentState';
+import stringToFieldConverter from '@/utils/stringToFieldConverter';
+import { FieldType } from '@/types/question.type';
+import dateConvertor from '@/utils/dateConverter';
 
 const SearchPage: NextPage = () => {
   const selectedState = useRecoilValue(searchFilterState);
-
+  const currentTitle = useRecoilValue<string>(currentState);
   const searchParams = useSearchParams();
 
   const search = searchParams.get('search');
@@ -38,6 +41,11 @@ const SearchPage: NextPage = () => {
     setCurrentPage(page);
   };
 
+  // 페이지네이션 초기화
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [currentTitle]);
+
   return (
     <Container>
       <Spacing direction="vertical" size={64} />
@@ -47,11 +55,16 @@ const SearchPage: NextPage = () => {
         <SideBar menuList={MAINPAGE_MENU_LIST} />
         <Spacing direction="horizontal" size={138} />
         <RightWrap>
-          <Title>전체</Title>
+          <Title>{currentTitle}</Title>
           <Spacing direction="vertical" size={32} />
           <CardWrap>
             {data && data?.result.length > 0 ? (
               data.result
+                .filter((item) =>
+                  currentTitle === '전체'
+                    ? true
+                    : item.fields.includes(stringToFieldConverter(currentTitle) as FieldType),
+                )
                 .slice(startIndex, Math.min(startIndex + itemsPerPage, data.result.length))
                 .map((items) => (
                   <Card
@@ -62,7 +75,7 @@ const SearchPage: NextPage = () => {
                     fields={items.fields}
                     hits={items.hits}
                     answerCount={items.answerCount}
-                    postTime={items.postTime}
+                    postTime={dateConvertor(items.postTime)}
                     key={items.id}
                   />
                 ))
@@ -73,15 +86,26 @@ const SearchPage: NextPage = () => {
           <Spacing direction="vertical" size={24} />
           <Pagination>
             {data
-              ? Array.from({ length: Math.ceil(data.result.length / itemsPerPage) }, (_, index) => (
-                  <PageBtn
-                    key={index + 1}
-                    onClick={() => handlePageChange(index + 1)}
-                    className={currentPage === index + 1 ? 'active' : ''}
-                  >
-                    {index + 1}
-                  </PageBtn>
-                ))
+              ? Array.from(
+                  {
+                    length: Math.ceil(
+                      data.result.filter((item) =>
+                        currentTitle === '전체'
+                          ? true
+                          : item.fields.includes(stringToFieldConverter(currentTitle) as FieldType),
+                      ).length / itemsPerPage,
+                    ),
+                  },
+                  (_, index) => (
+                    <PageBtn
+                      key={index + 1}
+                      onClick={() => handlePageChange(index + 1)}
+                      className={currentPage === index + 1 ? 'active' : ''}
+                    >
+                      {index + 1}
+                    </PageBtn>
+                  ),
+                )
               : null}
           </Pagination>
           <Spacing direction="vertical" size={73} />

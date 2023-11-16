@@ -19,7 +19,7 @@ const SearchInput = forwardRef(
       width = '640px',
       height = '56px',
       border = true,
-      forwardvalue,
+      forwardvalue = '',
       forwardsetvalue,
       ...props
     }: SearchInputProps,
