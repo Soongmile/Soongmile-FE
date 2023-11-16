@@ -17,7 +17,7 @@ interface QuestionType {
   title: string;
   content: string;
   tags: [];
-  fields: [];
+  fields: string[];
   postTime: string;
   hits: number;
   answerCount: number;
