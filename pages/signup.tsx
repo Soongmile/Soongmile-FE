@@ -3,10 +3,14 @@ import type { NextPage } from 'next';
 import styled from 'styled-components';
 import { useState } from 'react';
 import Link from 'next/link';
+import useSignup from '@/hooks/useSignup';
+import usePostSignup from '@/hooks/usePostSignup';
+import client from '@/apis/client';
 import theme from '../styles/theme';
 import TextInput from '../components/reusable/Inputs/TextInput';
 import CheckedBtn from '../components/reusable/Buttons/CheckedBtn';
 import SquareBtn from '../components/reusable/Buttons/SquareBtn';
+import Ok from '../assets/icons/CheckCircle.svg';
 
 interface AgreeType {
   personalInfo: boolean;
@@ -19,69 +23,69 @@ interface FontProps {
 }
 
 const Signup: NextPage = () => {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+  const {
+    registerForm,
+    isNicknameValid,
+    isEmailValid,
+    isPasswordValid,
+    isPasswordConfirmValid,
+    handleNickname,
+    handleEmail,
+    handlePassword,
+    handlePasswordConfirm,
+    nicknameError,
+    emailError,
+    passwordError,
+    passwordConfirmError,
+  } = useSignup();
   const [{ personalInfo, adInfo }, setAgree] = useState<AgreeType>({
     personalInfo: false,
     adInfo: false,
   });
 
-  const [nicknameError, setNicknameError] = useState<string>('');
-  const [passwordError, setPasswordError] = useState<string>('');
-  const [passwordConfirmError, setPasswordConfirmError] = useState<string>('');
+  const [isCode, setIsCode] = useState<string>('');
+  const [isSuccessCode, setIsSuccessCode] = useState<boolean>(false);
+  const [countdown, setCountdown] = useState<number | null>(null);
+  const { mutate: postSignupForm } = usePostSignup();
 
-  const nicknameCheck = /^[가-힣A-Za-z0-9_]{1,10}$/;
-  const passwordCheck = /^[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,20}$/;
-
-  const isNicknameValid = (nickname: string): boolean => {
-    return nicknameCheck.test(nickname);
-  };
-  const isPasswordValid = (password: string): boolean => {
-    return passwordCheck.test(password);
-  };
-  const isPasswordConfirmValid = (passwordConfirm: string): boolean => {
-    return password === passwordConfirm;
+  const handleCertificate = () => {
+    client.post(`/user/join/emailConfirm?code=${isCode}`).then((res) => {
+      alert('인증이 완료되었습니다.');
+      console.log(res);
+      setIsSuccessCode(true);
+    });
   };
 
-  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newNickname = e.target.value;
-    setName(newNickname);
-    setNicknameError('');
+  const startCountdown = () => {
+    setCountdown(300); // 5분을 초로 환산
+    const countdownInterval = setInterval(() => {
+      setCountdown((prev) => (prev !== null ? prev - 1 : null));
+    }, 1000);
 
-    if (!isNicknameValid(newNickname)) {
-      setNicknameError('1~10자 이내, 한글, 영문, 특수기호(_) 사용 가능');
-    } else {
-      setNicknameError('');
-    }
+    // 5분 후에 인터벌을 클리어하고 countdown을 초기화
+    setTimeout(() => {
+      clearInterval(countdownInterval);
+      setCountdown(null);
+    }, 300000);
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    setPasswordError('');
-
-    if (!isPasswordValid(newPassword)) {
-      setPasswordError('8~20자 이내, 문자, 숫자, 특수기호 사용 가능');
-    } else {
-      setPasswordError('');
-    }
+  const formatCountdown = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
   };
 
-  const handlePasswordConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPasswordConfirm = e.target.value;
-    setPasswordConfirm(newPasswordConfirm);
-    setPasswordConfirmError('');
-
-    if (!isPasswordConfirmValid(newPasswordConfirm)) {
-      setPasswordConfirmError('비밀번호가 일치하지 않습니다.');
-    } else {
-      setPasswordConfirmError('');
-    }
+  const handleEmailCode = () => {
+    client.post(`/user/join/sendEmailCode?email=${registerForm.email}`).then((res) => {
+      alert('인증을 위해 메일함을 확인해주세요.');
+      console.log(res);
+      startCountdown();
+    });
   };
 
-  const checkedAllInfo = personalInfo && adInfo;
+  const handleCode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsCode(e.target.value);
+  };
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, checked } = e.target;
@@ -112,16 +116,72 @@ const Signup: NextPage = () => {
         type="text"
         width="640px"
         height="56px"
-        onChange={handleNicknameChange}
-        hasError={!isNicknameValid(name)}
-        errorMessage={name && !isNicknameValid(name) ? nicknameError : ''}
+        onChange={(e) => handleNickname(e.target.value)}
+        hasError={!isNicknameValid(registerForm.membername)}
+        errorMessage={
+          registerForm.membername && !isNicknameValid(registerForm.membername) ? nicknameError : ''
+        }
       />
       <Spacing direction="vertical" size={32} />
-      <SubText>이메일</SubText>
+      <SubText>숭실대 이메일</SubText>
       <Spacing direction="vertical" size={16} />
       <InputFlex>
-        <TextInput type="email" width="503px" height="56px" />
-        <CheckedBtn children="중복확인" able={!!email} />
+        <TextInputContainer>
+          <InputContainer>
+            <TextInput
+              type="email"
+              width="470px"
+              height="56px"
+              onChange={(e) => handleEmail(e.target.value)}
+              hasError={!isEmailValid(registerForm.email)}
+              errorMessage={
+                registerForm.email && !isEmailValid(registerForm.email) ? emailError : ''
+              }
+            />
+          </InputContainer>
+        </TextInputContainer>
+        <CheckedBtn
+          children="인증코드 전송"
+          able={isEmailValid(registerForm.email)}
+          onClick={() => {
+            handleEmailCode();
+          }}
+        />
+      </InputFlex>
+      <Spacing direction="vertical" size={32} />
+      <SubText>인증코드 입력</SubText>
+      <Spacing direction="vertical" size={16} />
+      <InputFlex>
+        <TextInputContainer>
+          <InputContainer>
+            <TextInput
+              type="text"
+              width="510px"
+              height="56px"
+              onChange={handleCode}
+              hasError={!(isCode.length === 4 && /^\d{4}$/.test(isCode))}
+              errorMessage={
+                isCode && !(isCode.length === 4 && /^\d{4}$/.test(isCode))
+                  ? '인증코드 숫자 4자리를 입력해주세요.'
+                  : ''
+              }
+            />
+            {isSuccessCode ? (
+              <OkStyle>
+                <Ok alt="ok" width="24" height="24" />
+              </OkStyle>
+            ) : (
+              countdown !== null && <CountdownText>{formatCountdown(countdown)}</CountdownText>
+            )}
+          </InputContainer>
+        </TextInputContainer>
+        <CheckedBtn
+          children="인증하기"
+          able={isCode.length === 4 && /^\d{4}$/.test(isCode) && !isSuccessCode}
+          onClick={() => {
+            handleCertificate();
+          }}
+        />
       </InputFlex>
       <Spacing direction="vertical" size={32} />
       <SubText>비밀번호</SubText>
@@ -130,9 +190,11 @@ const Signup: NextPage = () => {
         type="password"
         width="640px"
         height="56px"
-        onChange={handlePasswordChange}
-        hasError={!isPasswordValid(password)}
-        errorMessage={password && !isPasswordValid(password) ? passwordError : ''}
+        onChange={(e) => handlePassword(e.target.value)}
+        hasError={!isPasswordValid(registerForm.password)}
+        errorMessage={
+          registerForm.password && !isPasswordValid(registerForm.password) ? passwordError : ''
+        }
       />
       <Spacing direction="vertical" size={32} />
       <SubText>비밀번호 확인</SubText>
@@ -141,10 +203,12 @@ const Signup: NextPage = () => {
         type="password"
         width="640px"
         height="56px"
-        onChange={handlePasswordConfirmChange}
-        hasError={!isPasswordConfirmValid(passwordConfirm)}
+        onChange={(e) => handlePasswordConfirm(e.target.value)}
+        hasError={!isPasswordConfirmValid(registerForm.passwordchecker)}
         errorMessage={
-          passwordConfirm && !isPasswordConfirmValid(passwordConfirm) ? passwordConfirmError : ''
+          registerForm.passwordchecker && !isPasswordConfirmValid(registerForm.passwordchecker)
+            ? passwordConfirmError
+            : ''
         }
       />
       <Spacing direction="vertical" size={32} />
@@ -187,12 +251,16 @@ const Signup: NextPage = () => {
           children="회원가입"
           able={
             !!(
-              isNicknameValid(name) &&
-              isPasswordValid(password) &&
-              isPasswordConfirmValid(passwordConfirm) &&
-              personalInfo
+              isNicknameValid(registerForm.membername) &&
+              isPasswordValid(registerForm.password) &&
+              isPasswordConfirmValid(registerForm.passwordchecker) &&
+              personalInfo &&
+              isSuccessCode
             )
           }
+          onClick={() => {
+            postSignupForm(registerForm);
+          }}
         />
       </Link>
       <Spacing direction="vertical" size={111} />
@@ -230,7 +298,7 @@ const SubText = styled.div`
 const InputFlex = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 24px;
+  justify-content: space-between;
 `;
 
 const CheckBoxContainer = styled.div`
@@ -267,4 +335,31 @@ const CheckedLabel = styled.label<FontProps>`
 
 const SpanStyle = styled.span<FontProps>`
   color: ${(props) => (props.color === 'primary' ? theme.colors.primary : theme.colors.gray2)};
+`;
+
+const TextInputContainer = styled.div`
+  width: 500px;
+`;
+
+const InputContainer = styled.div`
+  position: relative;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const CountdownText = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 16px; // 오른쪽 여백 조정
+  transform: translateY(-50%);
+  font-size: 18px; // 원하는 크기로 조정
+  color: ${theme.colors.primary};
+  font-weight: 400;
+`;
+
+const OkStyle = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 16px; // 오른쪽 여백 조정
+  transform: translateY(-50%);
 `;
