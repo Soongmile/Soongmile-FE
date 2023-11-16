@@ -51,6 +51,10 @@ const Search = ({ variant = 'down' }: SearchProps) => {
   const [value, setValue] = useState<string>('');
 
   useEffect(() => {
+    if (search === null) {
+      setValue('');
+      return;
+    }
     setValue(search as string);
   }, [search]);
 
