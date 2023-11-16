@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import theme from '@/styles/theme';
 import colors from '../styles/colors';
 
-const CoffeeChat = () => {
+const Point = () => {
   return (
     <Background>
       <Container>🚧 릴리즈 예정입니다. 🚧</Container>
@@ -10,7 +10,7 @@ const CoffeeChat = () => {
   );
 };
 
-export default CoffeeChat;
+export default Point;
 
 const Background = styled.div`
   background-color: ${colors.gray0};
