@@ -48,69 +48,77 @@ const SearchPage: NextPage = () => {
 
   return (
     <Container>
-      <Spacing direction="vertical" size={64} />
-      <Search />
-      <Spacing direction="vertical" size={64} />
-      <ContentWrap>
-        <SideBar menuList={MAINPAGE_MENU_LIST} />
-        <Spacing direction="horizontal" size={138} />
-        <RightWrap>
-          <Title>{currentTitle}</Title>
-          <Spacing direction="vertical" size={32} />
-          <CardWrap>
-            {data && data?.result.length > 0 ? (
-              data.result
-                .filter((item) =>
-                  currentTitle === '전체'
-                    ? true
-                    : item.fields.includes(stringToFieldConverter(currentTitle) as FieldType),
-                )
-                .slice(startIndex, Math.min(startIndex + itemsPerPage, data.result.length))
-                .map((items) => (
-                  <Card
-                    id={items.id}
-                    title={items.title}
-                    content={items.content}
-                    tags={items.tag}
-                    fields={items.fields}
-                    hits={items.hits}
-                    answerCount={items.answerCount}
-                    postTime={dateConvertor(items.postTime)}
-                    key={items.id}
-                  />
-                ))
-            ) : (
-              <div>검색 결과가 없습니다.</div>
-            )}
-          </CardWrap>
-          <Spacing direction="vertical" size={24} />
-          <Pagination>
-            {data
-              ? Array.from(
-                  {
-                    length: Math.ceil(
-                      data.result.filter((item) =>
-                        currentTitle === '전체'
-                          ? true
-                          : item.fields.includes(stringToFieldConverter(currentTitle) as FieldType),
-                      ).length / itemsPerPage,
+      <SearchContainer>
+        <Spacing direction="vertical" size={64} />
+        <Search />
+        <Spacing direction="vertical" size={64} />
+      </SearchContainer>
+      <ContentContainer>
+        <Spacing direction="vertical" size={72} />
+        <ContentWrap>
+          <SideBar menuList={MAINPAGE_MENU_LIST} />
+          <Spacing direction="horizontal" size={138} />
+          <RightWrap>
+            <Title>{currentTitle}</Title>
+            <Spacing direction="vertical" size={32} />
+            <CardWrap>
+              {data && data?.result.length > 0 ? (
+                data.result
+                  .filter((item) =>
+                    currentTitle === '전체'
+                      ? true
+                      : item.fields.includes(stringToFieldConverter(currentTitle) as FieldType),
+                  )
+                  .slice(startIndex, Math.min(startIndex + itemsPerPage, data.result.length))
+                  .map((items) => (
+                    <Card
+                      id={items.id}
+                      title={items.title}
+                      content={items.content}
+                      tags={items.tag}
+                      fields={items.fields}
+                      hits={items.hits}
+                      answerCount={items.answerCount}
+                      postTime={dateConvertor(items.postTime)}
+                      key={items.id}
+                    />
+                  ))
+              ) : (
+                <div>검색 결과가 없습니다.</div>
+              )}
+            </CardWrap>
+            <Spacing direction="vertical" size={24} />
+            <Pagination>
+              {data
+                ? Array.from(
+                    {
+                      length: Math.ceil(
+                        data.result.filter((item) =>
+                          currentTitle === '전체'
+                            ? true
+                            : item.fields.includes(
+                                stringToFieldConverter(currentTitle) as FieldType,
+                              ),
+                        ).length / itemsPerPage,
+                      ),
+                    },
+                    (_, index) => (
+                      <PageBtn
+                        key={index + 1}
+                        onClick={() => handlePageChange(index + 1)}
+                        className={currentPage === index + 1 ? 'active' : ''}
+                      >
+                        {index + 1}
+                      </PageBtn>
                     ),
-                  },
-                  (_, index) => (
-                    <PageBtn
-                      key={index + 1}
-                      onClick={() => handlePageChange(index + 1)}
-                      className={currentPage === index + 1 ? 'active' : ''}
-                    >
-                      {index + 1}
-                    </PageBtn>
-                  ),
-                )
-              : null}
-          </Pagination>
-          <Spacing direction="vertical" size={73} />
-        </RightWrap>
-      </ContentWrap>
+                  )
+                : null}
+            </Pagination>
+            <Spacing direction="vertical" size={73} />
+          </RightWrap>
+        </ContentWrap>
+        <Spacing direction="vertical" size={72} />
+      </ContentContainer>
     </Container>
   );
 };
@@ -123,10 +131,29 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: ${theme.colors.white};
+`;
+
+const SearchContainer = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: ${theme.colors.gray0};
 `;
 
+const ContentContainer = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${theme.colors.white};
+`;
+
 const ContentWrap = styled.div`
+  height: 1173px;
   display: flex;
 `;
 
