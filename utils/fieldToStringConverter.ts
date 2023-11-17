@@ -1,6 +1,6 @@
 import { FieldType } from '@/types/question.type';
 
-const fieldConverter = (field: FieldType) => {
+const fieldToStringConverter = (field: FieldType) => {
   switch (field) {
     case 'BACKEND':
       return '백엔드';
@@ -19,4 +19,4 @@ const fieldConverter = (field: FieldType) => {
   }
 };
 
-export default fieldConverter;
+export default fieldToStringConverter;

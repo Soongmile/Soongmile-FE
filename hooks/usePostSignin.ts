@@ -8,9 +8,14 @@ const usePostSignin = () => {
   const router = useRouter();
   return useMutation(postSignin, {
     onSuccess: (data) => {
-      setCookie('token', data.result);
-      router.push(`/`);
-      console.log(data);
+      if (data.code === 200) {
+        setCookie('token', data.result.token);
+        setCookie('memberName', data.result.memberName);
+        router.push(`/`);
+        console.log(data);
+      } else {
+        alert(data.message);
+      }
     },
     onError: (error) => {
       const Error = error as AxiosError;

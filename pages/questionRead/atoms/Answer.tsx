@@ -9,7 +9,6 @@ const Answer = ({ answers }: { answers?: AnswerType[] }) => {
     <AnswerContainer>
       {answers?.map((item, idx) => (
         <>
-          {/* userName 수정 예정 */}
           <AnswerBox
             key={item.id}
             userName={item.memberName}

@@ -12,6 +12,7 @@ import usePostQuestionWrite from '@/hooks/usePostQuestionWrite';
 import QuestionTitle from './atoms/QuestionTitle';
 import FieldSelector from './atoms/FieldSelector';
 import StackSearch from './atoms/StackSearch';
+import withAuth from '../withAuth';
 
 const MarkdownEditor = dynamic(() => import('../../components/reusable/MarkDown/MarkdownEditor'), {
   ssr: false,
@@ -93,7 +94,7 @@ const QuestionWrite: NextPage = () => {
   );
 };
 
-export default QuestionWrite;
+export default withAuth(QuestionWrite);
 
 const Wrap = styled.div`
   margin: 0px auto;
