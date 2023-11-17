@@ -10,6 +10,7 @@ const withAuth = (WrappedComponent: NextPage) => {
       const token = getCookie('token');
 
       if (!token) {
+        alert('로그인이 필요합니다.');
         router.push('/signin');
       }
     }, []);
