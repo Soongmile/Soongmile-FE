@@ -12,8 +12,6 @@ import usePostQuestionWrite from '@/hooks/usePostQuestionWrite';
 import QuestionTitle from './atoms/QuestionTitle';
 import FieldSelector from './atoms/FieldSelector';
 import StackSearch from './atoms/StackSearch';
-import { getCookie } from 'cookies-next';
-import { useRouter } from 'next/router';
 import withAuth from '../withAuth';
 
 const MarkdownEditor = dynamic(() => import('../../components/reusable/MarkDown/MarkdownEditor'), {
