@@ -2,7 +2,7 @@ import Spacing from '@/components/reusable/Spacing';
 import Tag from '@/components/reusable/Tag';
 import theme from '@/styles/theme';
 import { GetQuestionResponse } from '@/types/question.type';
-import fieldConverter from '@/utils/fieldConverter';
+import fieldConverter from '@/utils/fieldToStringConverter';
 import dateConvertor from '@/utils/dateConverter';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
@@ -54,9 +54,14 @@ const Question = ({ data }: QuestionProps) => {
             <QuestionContent>{data.content && <Viewer content={data.content} />}</QuestionContent>
             <Spacing direction="vertical" size={32} />
             <InfoContainer>
-              <Info>{data.memberName}</Info>
+              {/* <LikeWrap>
+                <Like liked />
+                <Spacing direction="horizontal" size={10} />
+                <LikeCount>{data.likes}</LikeCount>
+              </LikeWrap> */}
               <InfoWrap>
-                {/* 수정 필요 */}
+                <Info>{data.memberName}</Info>
+                <Spacing direction="horizontal" size={16} />
                 <Info>{dateConvertor(data.postTime)}</Info>
                 <Spacing direction="horizontal" size={16} />
                 <Info>{`조회수 ${data.hits}`}</Info>
@@ -128,4 +133,28 @@ const Info = styled.div`
   font-size: ${theme.fontStyles.Text_M.fontSize}px;
   font-weight: ${theme.fontStyles.Text_M.fontWeight};
   color: ${theme.colors.gray2};
+`;
+
+const LikeWrap = styled.div`
+  display: flex;
+  align-items: center;
+  width: 53px;
+  height: 24px;
+  color: ${theme.colors.primary};
+`;
+
+interface LikeProps {
+  liked: boolean;
+}
+
+const Like = styled.div<LikeProps>`
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-image: url(${(props) => (props.liked ? '/img/likeClicked.svg' : '/img/like.svg')});
+`;
+
+const LikeCount = styled.span`
+  font-size: ${theme.fontStyles.Text_M.fontSize}px;
+  font-weight: ${theme.fontStyles.Text_M.fontWeight};
 `;

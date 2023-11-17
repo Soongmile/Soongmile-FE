@@ -22,7 +22,23 @@ const Signin: NextPage = () => {
       <Spacing direction="vertical" size={56} />
       <SubText>이메일</SubText>
       <Spacing direction="vertical" size={16} />
-      <TextInput type="email" width="640px" height="56px" value={email} onChange={onChangeEmail} />
+      <TextInput
+        type="email"
+        width="640px"
+        height="56px"
+        value={email}
+        onChange={onChangeEmail}
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') {
+            if (!email || !password) {
+              alert('이메일과 비밀번호를 입력해주세요.');
+              return;
+            }
+
+            signin({ email, password });
+          }
+        }}
+      />
       <Spacing direction="vertical" size={32} />
       <SubText>비밀번호</SubText>
       <Spacing direction="vertical" size={16} />
@@ -32,11 +48,26 @@ const Signin: NextPage = () => {
         height="56px"
         value={password}
         onChange={onChangePassword}
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') {
+            if (!email || !password) {
+              alert('이메일과 비밀번호를 입력해주세요.');
+              return;
+            }
+
+            signin({ email, password });
+          }
+        }}
       />
       <Spacing direction="vertical" size={64} />
       <BtnContainer>
         <SquareBtn
           onClick={() => {
+            if (!email || !password) {
+              alert('이메일과 비밀번호를 입력해주세요.');
+              return;
+            }
+
             signin({ email, password });
           }}
         >

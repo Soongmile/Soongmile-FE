@@ -69,7 +69,7 @@ const dateConvertor = (date: string) => {
   } else if (elapsedTime < day * 15) {
     elapsedText = `${Math.trunc(elapsedTime / day)}일 전`;
   } else {
-    elapsedText = SimpleDateTimeFormat(writeDate, 'yyyy.M.d');
+    elapsedText = SimpleDateTimeFormat(writeDate, 'yyyy.MM.dd');
   }
 
   return elapsedText;

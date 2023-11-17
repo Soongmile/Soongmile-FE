@@ -1,13 +1,13 @@
 import QuestionBtn from '@/components/reusable/Buttons/QuestionBtn';
 import Spacing from '@/components/reusable/Spacing';
 import SearchInput from '@/components/reusable/Inputs/SearchInput';
-import SearchFilter from '@/components/reusable/Search/SearchFilter';
+import SearchFilter from '@/components/reusable/Search/atoms/SearchFilter';
 import styled from 'styled-components';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import searchFilterState from '@/states/searchFilterState';
-import { useRouter } from 'next/router';
-import SearchFilterDropdown from './SearchFilterDropdown';
+import { useSearchParams, useRouter } from 'next/navigation';
+import SearchFilterDropdown from './atoms/SearchFilterDropdown';
 
 interface SearchProps {
   variant?: 'up' | 'down';
@@ -16,6 +16,8 @@ interface SearchProps {
 const Search = ({ variant = 'down' }: SearchProps) => {
   const [dropdownState, setDropdownState] = useState<boolean>(false);
   const selectedState = useRecoilValue(searchFilterState);
+  const searchParams = useSearchParams();
+  const search = searchParams.get('search');
 
   const ref = useRef<HTMLButtonElement>(null);
   const dropRef = useRef<HTMLDivElement>(null);
@@ -46,6 +48,16 @@ const Search = ({ variant = 'down' }: SearchProps) => {
     };
   });
 
+  const [value, setValue] = useState<string>('');
+
+  useEffect(() => {
+    if (search === null) {
+      setValue('');
+      return;
+    }
+    setValue(search as string);
+  }, [search]);
+
   return (
     <SearchContainer>
       <SearchFilterWrap>
@@ -71,7 +83,13 @@ const Search = ({ variant = 'down' }: SearchProps) => {
         )}
       </SearchFilterWrap>
       <Spacing direction="horizontal" size={24} />
-      <SearchInput placeholder="궁금한 내용을 검색해보세요" border={false} width="733px" />
+      <SearchInput
+        placeholder="궁금한 내용을 검색해보세요"
+        border={false}
+        width="733px"
+        forwardvalue={value}
+        forwardsetvalue={setValue}
+      />
       <Spacing direction="horizontal" size={48} />
       <QuestionBtn
         onClick={() => {

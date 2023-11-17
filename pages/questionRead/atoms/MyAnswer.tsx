@@ -30,7 +30,7 @@ const MyAnswer = ({ pId }: MyAnswerProps) => {
     setAnswerContent(data as string);
   };
 
-  const { mutate: postAnswer, isSuccess } = usePostAnswer(pId);
+  const { mutate: postAnswer, isSuccess } = usePostAnswer();
 
   useEffect(() => {
     setAnswerContent('');
