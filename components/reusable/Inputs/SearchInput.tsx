@@ -36,6 +36,7 @@ const SearchInput = forwardRef(
           border={border.toString()}
           value={forwardvalue}
           onChange={(e) => {
+            if (forwardsetvalue === undefined) return;
             forwardsetvalue(e.target.value);
           }}
           onKeyUp={(e) => {
