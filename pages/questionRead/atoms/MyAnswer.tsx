@@ -4,7 +4,9 @@ import Spacing from '@/components/reusable/Spacing';
 import usePostAnswer from '@/hooks/usePostAnswer';
 import theme from '@/styles/theme';
 import { Editor } from '@toast-ui/react-editor';
+import { getCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
+import { Router, useRouter } from 'next/router';
 import { RefObject, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -30,7 +32,10 @@ const MyAnswer = ({ pId }: MyAnswerProps) => {
     setAnswerContent(data as string);
   };
 
-  const { mutate: postAnswer, isSuccess } = usePostAnswer(pId);
+  const token = getCookie('token');
+  const Router = useRouter();
+
+  const { mutate: postAnswer, isSuccess } = usePostAnswer();
 
   useEffect(() => {
     setAnswerContent('');
@@ -58,6 +63,11 @@ const MyAnswer = ({ pId }: MyAnswerProps) => {
         <AlignedSquareBtn
           able={answerContent !== ''}
           onClick={() => {
+            if (!token) {
+              alert('로그인이 필요합니다.');
+              Router.push('/signin');
+              return;
+            }
             postAnswer({ content: answerContent, fileIds: [], questionId: pId });
           }}
         >

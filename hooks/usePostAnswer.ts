@@ -4,12 +4,12 @@ import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
 
-const usePostAnswer = (pId: number) => {
+const usePostAnswer = () => {
   const router = useRouter();
   return useMutation(postAnswer, {
     onSuccess: () => {
       queryClient.invalidateQueries(['getQuestion']);
-      router.push(`/questionRead/${pId}`);
+      router.reload();
     },
     onError: (error) => {
       const Error = error as AxiosError;
