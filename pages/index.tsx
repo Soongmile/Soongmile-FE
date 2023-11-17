@@ -1,5 +1,5 @@
 import Card from '@/components/reusable/Card';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import { MAINPAGE_MENU_LIST } from '@/const';
 import SideBar from '@/components/reusable/SideBar';
@@ -7,17 +7,40 @@ import Search from '@/components/reusable/Search';
 import Spacing from '@/components/reusable/Spacing';
 import { styled } from 'styled-components';
 import theme from '@/styles/theme';
+import usePostBoard from '@/hooks/usePostBoard';
+import currentState from '@/states/CurrentState';
+import { useRecoilValue } from 'recoil';
 import colors from '../styles/colors';
 import BannerMan from '../assets/BannerMan.svg';
 import Left from '../assets/icons/LeftArrow.svg';
 import Right from '../assets/icons/RightArrow.svg';
+import BoardState from '../states/BoardState';
+
+interface QuestionType {
+  id: number;
+  title: string;
+  content: string;
+  tags: string[]; // 또는 원하는 다른 타입으로
+  fields: any[]; // 또는 원하는 다른 타입으로
+  postTime: string;
+  hits: number;
+  answerCount: number;
+}
 
 const Home: NextPage = () => {
-  const itemsPerPage = 6; // 한 페이지에 표시할 아이템 수
-  const totalItems = 12; // 전체 아이템 수 (예시로 12개로 설정)
-
+  const { mutate: postGetBoard } = usePostBoard();
   const [currentPage, setCurrentPage] = useState(1);
+  const currentTitle = useRecoilValue<string>(currentState);
+  const currentBoard = useRecoilValue<QuestionType[]>(BoardState);
 
+  const BoardArr = [...currentBoard].reverse();
+
+  useEffect(() => {
+    postGetBoard();
+  }, [currentTitle]);
+
+  const itemsPerPage = 6;
+  const totalItems = currentBoard.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePageChange = (page: number) => {
@@ -29,28 +52,70 @@ const Home: NextPage = () => {
 
   const cardsPerPage = 3;
 
-  // 현재 보이는 카드 범위의 시작 인덱스
   const [isstartIndex, setIsStartIndex] = useState(0);
 
-  // 좌우 화살표를 클릭하여 카드 범위를 업데이트하는 함수
   const handleArrowClick = (direction: string) => {
     if (direction === 'left') {
-      // 좌측 화살표를 클릭할 때
-      if (startIndex > 0) {
-        setIsStartIndex(isstartIndex - cardsPerPage);
+      if (isstartIndex > 0) {
+        setIsStartIndex(Math.max(0, isstartIndex - cardsPerPage));
       }
     } else if (direction === 'right') {
-      // 우측 화살표를 클릭할 때
-      // 여기서는 startIndex를 증가시켜 다음 범위의 카드를 표시합니다.
-      // 실제 데이터 배열의 길이와 함께 사용하여 끝까지 스크롤하면 더 이상 표시할 카드가 없도록 처리할 수 있습니다.
       setIsStartIndex(isstartIndex + cardsPerPage);
     }
   };
 
-  // 현재 보이는 카드 범위에 해당하는 카드 컴포넌트 렌더링
-  const visibleCards = Array.from({ length: cardsPerPage }, (_, index) => (
-    <Card key={isstartIndex + index} id={isstartIndex + index + 1} />
-  ));
+  const formatPostTime = (postTime: string): string => {
+    const currentDate = new Date();
+    const postDate = new Date(postTime);
+    const timeDifference = currentDate.getTime() - postDate.getTime();
+
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (Math.floor(timeDifference / (1000 * 60 * 60 * 24))) {
+      const year = postDate.getFullYear();
+      const month = postDate.getMonth() + 1;
+      const day = postDate.getDate();
+
+      return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
+    }
+
+    if (days > 0) {
+      return `${days}일 전`;
+    }
+
+    if (hours > 0) {
+      return `${hours}시간 전`;
+    }
+
+    if (minutes > 0) {
+      return `${minutes}분 전`;
+    }
+    return '방금 전';
+  };
+
+  const compareHits = (a: QuestionType, b: QuestionType) => {
+    return b.hits - a.hits;
+  };
+
+  const sortedBoardArr = [...BoardArr].sort(compareHits);
+
+  const topSixBoardArr = sortedBoardArr.slice(0, 6);
+  const isLeftArrowVisible = isstartIndex > 0;
+  const isRightArrowVisible = isstartIndex + cardsPerPage < topSixBoardArr.length;
+
+  const visibleCards = Array.from(
+    { length: Math.min(cardsPerPage, topSixBoardArr.length - isstartIndex) },
+    (_, index) => {
+      const boardItem = topSixBoardArr[isstartIndex + index];
+
+      return (
+        <Card key={boardItem.id} {...boardItem} postTime={formatPostTime(boardItem.postTime)} />
+      );
+    },
+  );
 
   return (
     <>
@@ -73,10 +138,14 @@ const Home: NextPage = () => {
           <BarContainer>
             <SideBar menuList={MAINPAGE_MENU_LIST} />
             <FlexColBox2>
-              <Title>전체</Title>
+              <Title>{currentTitle}</Title>
               <CardContainer>
-                {Array.from({ length: endIndex - startIndex }, (_, index) => (
-                  <Card key={startIndex + index} id={startIndex + index + 1} />
+                {BoardArr.slice(startIndex, endIndex).map((boardItem) => (
+                  <Card
+                    key={boardItem.id}
+                    {...boardItem}
+                    postTime={formatPostTime(boardItem.postTime)}
+                  />
                 ))}
               </CardContainer>
               <Pagination>
@@ -101,12 +170,19 @@ const Home: NextPage = () => {
           <BlueTitle>명예의 전당</BlueTitle>
           <Spacing direction="vertical" size={32} />
           <CardHonor>
-            {/* 좌측 화살표 */}
-            <Left onClick={() => handleArrowClick('left')} />
-            {/* 현재 보이는 카드 컴포넌트 렌더링 */}
+            <Left
+              onClick={() => isLeftArrowVisible && handleArrowClick('left')}
+              style={{
+                cursor: isLeftArrowVisible ? 'pointer' : 'not-allowed',
+              }}
+            />
             {visibleCards}
-            {/* 우측 화살표 */}
-            <Right onClick={() => handleArrowClick('right')} />
+            <Right
+              onClick={() => isRightArrowVisible && handleArrowClick('right')}
+              style={{
+                cursor: isRightArrowVisible ? 'pointer' : 'not-allowed',
+              }}
+            />
           </CardHonor>
         </Container>
         <Spacing direction="vertical" size={64} />

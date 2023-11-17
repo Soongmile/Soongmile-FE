@@ -1,4 +1,5 @@
 import { PostQuestionWriteResponse, QuestionWriteRequest } from '@/types/question.type';
+import { getCookie } from 'cookies-next';
 import client from './client';
 
 const postQuestionWrite = async ({
@@ -8,6 +9,8 @@ const postQuestionWrite = async ({
   field,
   tag,
 }: QuestionWriteRequest): Promise<PostQuestionWriteResponse> => {
+  const token = getCookie('token');
+
   const response = await client.post(
     '/user/question',
     {
@@ -19,8 +22,7 @@ const postQuestionWrite = async ({
     },
     {
       headers: {
-        Authorization:
-          'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha211QGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjk1OTgyNTI1LCJleHAiOjE2OTYwNjg5MjV9.N5UWZD4xvULjHk7EaKblTM7kJwEdZrQ3cfII1jZMuAE',
+        Authorization: token,
       },
     },
   );
