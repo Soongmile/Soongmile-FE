@@ -8,8 +8,8 @@ interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: string;
   height?: string;
   border?: boolean;
-  forwardvalue: string;
-  forwardsetvalue: Dispatch<SetStateAction<string>>;
+  forwardvalue?: string;
+  forwardsetvalue?: Dispatch<SetStateAction<string>>;
 }
 
 const SearchInput = forwardRef(
@@ -36,6 +36,7 @@ const SearchInput = forwardRef(
           border={border.toString()}
           value={forwardvalue}
           onChange={(e) => {
+            if (forwardsetvalue === undefined) return;
             forwardsetvalue(e.target.value);
           }}
           onKeyUp={(e) => {
