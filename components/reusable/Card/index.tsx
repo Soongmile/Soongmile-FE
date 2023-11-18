@@ -79,15 +79,16 @@ const Card = ({ id, title, content, tags, fields, postTime, hits, answerCount }:
     >
       <StackTagsArea>
         <StackTagsWrap ref={ref}>
-          {fields &&
-            fields.map((field) => (
-              <>
-                <Tag color="color" size="small">
-                  <p key={field}>{field}</p>
-                </Tag>
-                <Spacing direction="horizontal" size={8} />
-              </>
-            ))}
+          {fields
+            ? fields.map((field) => (
+                <>
+                  <Tag color="color" size="small">
+                    <p key={field}>{field}</p>
+                  </Tag>
+                  <Spacing direction="horizontal" size={8} />
+                </>
+              ))
+            : null}
         </StackTagsWrap>
       </StackTagsArea>
       <Spacing direction="vertical" size={16} />
@@ -97,15 +98,16 @@ const Card = ({ id, title, content, tags, fields, postTime, hits, answerCount }:
       <Spacing direction="vertical" size={16} />
       <StackTagsArea>
         <StackTagsWrap ref={ref}>
-          {tags &&
-            tags.map((tag) => (
-              <>
-                <Tag color="gray" size="big">
-                  <p>{tag}</p>
-                </Tag>
-                <Spacing direction="horizontal" size={8} />
-              </>
-            ))}
+          {tags
+            ? tags.map((tag) => (
+                <>
+                  <Tag color="gray" size="big">
+                    <p>{tag}</p>
+                  </Tag>
+                  <Spacing direction="horizontal" size={8} />
+                </>
+              ))
+            : null}
         </StackTagsWrap>
         {useIsOverflow({ ref }) && scrollState === 'right' && (
           <OverflowBoxRight>
