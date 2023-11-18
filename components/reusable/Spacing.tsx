@@ -19,6 +19,6 @@ interface StyledSpacingProps {
 
 const StyledSpacing = styled.div<StyledSpacingProps>`
   flex: none;
-  width: ${(props) => (props.direction === 'horizontal' ? `${props.size}px` : undefined)};
-  height: ${(props) => (props.direction === 'vertical' ? `${props.size}px` : undefined)};
+  width: ${({ direction, size }) => (direction === 'horizontal' ? `${size}px` : 'auto')};
+  height: ${({ direction, size }) => (direction === 'vertical' ? `${size}px` : 'auto')};
 `;
