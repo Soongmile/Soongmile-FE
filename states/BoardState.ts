@@ -1,17 +1,17 @@
 import { atom } from 'recoil';
 
-interface QuestionType {
+export interface QuestionType {
   id: number;
   title: string;
   content: string;
-  tags: [];
+  tags: string[];
   fields: string[];
   postTime: string;
   hits: number;
   answerCount: number;
 }
 
-const BoardState = atom<QuestionType[]>({
+export const BoardState = atom<QuestionType[]>({
   key: 'BoardState',
   default: [
     {
@@ -26,5 +26,3 @@ const BoardState = atom<QuestionType[]>({
     },
   ],
 });
-
-export default BoardState;

@@ -79,7 +79,7 @@ const Card = ({ id, title, content, tags, fields, postTime, hits, answerCount }:
     >
       <StackTagsArea>
         <StackTagsWrap ref={ref}>
-          {fields &&
+          {fields ? (
             fields.map((field) => (
               <>
                 <Tag color="color" size="small">
@@ -87,7 +87,10 @@ const Card = ({ id, title, content, tags, fields, postTime, hits, answerCount }:
                 </Tag>
                 <Spacing direction="horizontal" size={8} />
               </>
-            ))}
+            ))
+          ) : (
+            <Blank />
+          )}
         </StackTagsWrap>
       </StackTagsArea>
       <Spacing direction="vertical" size={16} />
@@ -97,15 +100,22 @@ const Card = ({ id, title, content, tags, fields, postTime, hits, answerCount }:
       <Spacing direction="vertical" size={16} />
       <StackTagsArea>
         <StackTagsWrap ref={ref}>
-          {tags &&
-            tags.map((tag) => (
-              <>
-                <Tag color="gray" size="big">
-                  <p>{tag}</p>
-                </Tag>
-                <Spacing direction="horizontal" size={8} />
-              </>
-            ))}
+          {tags ? (
+            tags.map((tag) =>
+              tag.trim() ? (
+                <>
+                  <Tag color="gray" size="big">
+                    <p>{tag}</p>
+                  </Tag>
+                  <Spacing direction="horizontal" size={8} />
+                </>
+              ) : (
+                <Blank />
+              ),
+            )
+          ) : (
+            <Blank />
+          )}
         </StackTagsWrap>
         {useIsOverflow({ ref }) && scrollState === 'right' && (
           <OverflowBoxRight>
@@ -235,4 +245,10 @@ const ButtonRight = styled.div`
   height: 16px;
   width: 16px;
   background-image: url('/img/rightArrow.svg');
+`;
+
+const Blank = styled.div`
+  display: flex;
+  height: 24px;
+  width: 100%;
 `;
