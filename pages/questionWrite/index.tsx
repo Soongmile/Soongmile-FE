@@ -7,7 +7,6 @@ import dynamic from 'next/dynamic';
 import SquareBtn from '@/components/reusable/Buttons/SquareBtn';
 import MarkdownEditorSkeleton from '@/components/reusable/MarkDown/MarkdownEditorSkeleton';
 import useQuestionWrite from '@/hooks/useQuestionWrite';
-import { useEffect } from 'react';
 import usePostQuestionWrite from '@/hooks/usePostQuestionWrite';
 import QuestionTitle from './atoms/QuestionTitle';
 import FieldSelector from './atoms/FieldSelector';
@@ -24,10 +23,6 @@ const MarkdownEditor = dynamic(() => import('../../components/reusable/MarkDown/
 const QuestionWrite: NextPage = () => {
   const { writeForm, handleTitle, handleContent, handleField, handleTag } = useQuestionWrite();
   const { mutate: postQuestion } = usePostQuestionWrite();
-
-  useEffect(() => {
-    console.log(writeForm);
-  }, [writeForm]);
 
   return (
     <Wrap>

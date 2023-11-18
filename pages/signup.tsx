@@ -49,9 +49,8 @@ const Signup: NextPage = () => {
   const { mutate: postSignupForm } = usePostSignup();
 
   const handleCertificate = () => {
-    client.post(`/user/join/emailConfirm?code=${isCode}`).then((res) => {
+    client.post(`/user/join/emailConfirm?code=${isCode}`).then(() => {
       alert('인증이 완료되었습니다.');
-      console.log(res);
       setIsSuccessCode(true);
     });
   };
@@ -78,7 +77,6 @@ const Signup: NextPage = () => {
   const handleEmailCode = () => {
     client.post(`/user/join/sendEmailCode?email=${registerForm.email}`).then((res) => {
       alert('인증을 위해 메일함을 확인해주세요.');
-      console.log(res);
       startCountdown();
     });
   };
