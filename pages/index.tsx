@@ -7,25 +7,15 @@ import Search from '@/components/reusable/Search';
 import Spacing from '@/components/reusable/Spacing';
 import { styled } from 'styled-components';
 import theme from '@/styles/theme';
+import { useRecoilValue } from 'recoil';
 import usePostBoard from '@/hooks/usePostBoard';
 import currentState from '@/states/CurrentState';
-import { useRecoilValue } from 'recoil';
+import { QuestionType, BoardState } from '@/states/BoardState';
 import colors from '../styles/colors';
 import BannerMan from '../assets/BannerMan.svg';
 import Left from '../assets/icons/LeftArrow.svg';
 import Right from '../assets/icons/RightArrow.svg';
 import BoardState from '../states/BoardState';
-
-interface QuestionType {
-  id: number;
-  title: string;
-  content: string;
-  tags: string[]; // 또는 원하는 다른 타입으로
-  fields: any[]; // 또는 원하는 다른 타입으로
-  postTime: string;
-  hits: number;
-  answerCount: number;
-}
 
 const Home: NextPage = () => {
   const { mutate: postGetBoard } = usePostBoard();

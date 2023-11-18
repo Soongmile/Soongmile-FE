@@ -1,5 +1,5 @@
 import { BE, DESIGN, FE, MOBILE, PM, SCHOOL } from '@/const';
-import BoardState from '@/states/BoardState';
+import { BoardState, QuestionType } from '@/states/BoardState';
 import currentState from '@/states/CurrentState';
 import sideBarState from '@/states/sideBarState';
 import theme from '@/styles/theme';
@@ -10,17 +10,6 @@ import styled from 'styled-components';
 interface SideBarListProps {
   href: string;
   title: string;
-}
-
-interface QuestionType {
-  id: number;
-  title: string;
-  content: string;
-  tags: [];
-  fields: string[];
-  postTime: string;
-  hits: number;
-  answerCount: number;
 }
 
 const SideBarList = ({ href, title }: SideBarListProps) => {

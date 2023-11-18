@@ -1,11 +1,11 @@
 import postBoard from '@/apis/postBoard';
-import BoardState from '@/states/BoardState';
+import { BoardState } from '@/states/BoardState';
 import { AxiosError } from 'axios';
 import { useMutation } from 'react-query';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 const usePostBoard = () => {
-  const [currentBoard, setCurrentBoard] = useRecoilState(BoardState);
+  const setCurrentBoard = useSetRecoilState(BoardState);
 
   return useMutation(postBoard, {
     onSuccess: (response) => {
