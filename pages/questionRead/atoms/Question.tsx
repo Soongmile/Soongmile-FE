@@ -21,27 +21,31 @@ const Question = ({ data }: QuestionProps) => {
       {data ? (
         <ContentWrap>
           <TagWrap>
-            {data.field?.map((item) => (
-              <>
-                <Tag color="color" size="small">
-                  <p>{fieldConverter(item)}</p>
-                </Tag>
-                <Spacing direction="horizontal" size={16} />
-              </>
-            ))}
-            {data.tag?.map((item, index) =>
-              index < data.tag.length - 1 ? (
+            {data.field?.map((item) =>
+              item.trim() ? (
                 <>
-                  <Tag color="gray" size="small">
-                    <p>{item}</p>
+                  <Tag color="color" size="small">
+                    <p>{fieldConverter(item)}</p>
                   </Tag>
                   <Spacing direction="horizontal" size={16} />
                 </>
-              ) : (
+              ) : null,
+            )}
+            {data.tag?.map((item, index) =>
+              index < data.tag.length - 1 ? (
+                item.trim() ? (
+                  <>
+                    <Tag color="gray" size="small">
+                      <p>{item}</p>
+                    </Tag>
+                    <Spacing direction="horizontal" size={16} />
+                  </>
+                ) : null
+              ) : item.trim() ? (
                 <Tag color="gray" size="small">
                   <p>{item}</p>
                 </Tag>
-              ),
+              ) : null,
             )}
           </TagWrap>
           <Spacing direction="vertical" size={8} />
@@ -135,26 +139,26 @@ const Info = styled.div`
   color: ${theme.colors.gray2};
 `;
 
-const LikeWrap = styled.div`
-  display: flex;
-  align-items: center;
-  width: 53px;
-  height: 24px;
-  color: ${theme.colors.primary};
-`;
+// const LikeWrap = styled.div`
+//   display: flex;
+//   align-items: center;
+//   width: 53px;
+//   height: 24px;
+//   color: ${theme.colors.primary};
+// `;
 
-interface LikeProps {
-  liked: boolean;
-}
+// interface LikeProps {
+//   liked: boolean;
+// }
 
-const Like = styled.div<LikeProps>`
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  background-image: url(${(props) => (props.liked ? '/img/likeClicked.svg' : '/img/like.svg')});
-`;
+// const Like = styled.div<LikeProps>`
+//   width: 24px;
+//   height: 24px;
+//   cursor: pointer;
+//   background-image: url(${(props) => (props.liked ? '/img/likeClicked.svg' : '/img/like.svg')});
+// `;
 
-const LikeCount = styled.span`
-  font-size: ${theme.fontStyles.Text_M.fontSize}px;
-  font-weight: ${theme.fontStyles.Text_M.fontWeight};
-`;
+// const LikeCount = styled.span`
+//   font-size: ${theme.fontStyles.Text_M.fontSize}px;
+//   font-weight: ${theme.fontStyles.Text_M.fontWeight};
+// `;
