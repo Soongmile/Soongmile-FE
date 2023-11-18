@@ -15,7 +15,6 @@ import colors from '../styles/colors';
 import BannerMan from '../assets/BannerMan.svg';
 import Left from '../assets/icons/LeftArrow.svg';
 import Right from '../assets/icons/RightArrow.svg';
-import BoardState from '../states/BoardState';
 
 const Home: NextPage = () => {
   const { mutate: postGetBoard } = usePostBoard();
