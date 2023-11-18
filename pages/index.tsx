@@ -7,31 +7,20 @@ import Search from '@/components/reusable/Search';
 import Spacing from '@/components/reusable/Spacing';
 import { styled } from 'styled-components';
 import theme from '@/styles/theme';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import usePostBoard from '@/hooks/usePostBoard';
 import currentState from '@/states/CurrentState';
-import BoardState from '@/states/BoardState';
+import { QuestionType, BoardState } from '@/states/BoardState';
 import colors from '../styles/colors';
 import BannerMan from '../assets/BannerMan.svg';
 import Left from '../assets/icons/LeftArrow.svg';
 import Right from '../assets/icons/RightArrow.svg';
 
-interface QuestionType {
-  id: number;
-  title: string;
-  content: string;
-  tags: [];
-  fields: [];
-  postTime: string;
-  hits: number;
-  answerCount: number;
-}
-
 const Home: NextPage = () => {
   const { mutate: postGetBoard } = usePostBoard();
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentTitle, setCurrentTitle] = useRecoilState<string>(currentState);
-  const [currentBoard, setCurrentBoard] = useRecoilState<QuestionType[]>(BoardState);
+  const currentTitle = useRecoilValue<string>(currentState);
+  const currentBoard = useRecoilValue<QuestionType[]>(BoardState);
   const BoardArr = [...currentBoard].reverse();
 
   useEffect(() => {
