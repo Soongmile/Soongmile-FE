@@ -23,6 +23,7 @@ const MarkdownEditor = ({ onChange }: MarkdownEditorProps) => {
       onChange={() => onChange(editorRef)}
       initialValue=""
       previewStyle="tab"
+      autofocus={false}
       height="600px"
       initialEditType="markdown"
       language="ko-KR"
